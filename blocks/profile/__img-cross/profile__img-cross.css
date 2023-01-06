@@ -1,0 +1,13 @@
+.profile__img-cross {
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  transform: translate(-50%, -50%)
+}
+
+@media screen and (max-width: 425px) {
+  .profile__img-cross {
+    width: 16px;
+    height: 16px;
+  }
+}
