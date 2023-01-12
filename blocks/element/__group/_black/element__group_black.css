@@ -1,5 +1,5 @@
-.element__group {
-  background-image: url(../../../images/SVG/heart.svg);
+.element__group_black {
+  background-image: url(../../../../images/SVG/heart-black.svg);
   margin: 27px 0 0 30px;
   width: 22px;
   height: 19px;
@@ -12,9 +12,3 @@
   position: relative;
   fill: #000;
 }
-
-.element__group:hover {
-  opacity: 50%;
-}
-
-

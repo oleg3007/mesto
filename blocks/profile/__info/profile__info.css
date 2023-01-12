@@ -1,9 +1,10 @@
 .profile__info {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
-  max-width: 350px;
-  align-items: center;
   padding-top: 10px;
+  max-width: 490px;
+
 }
 
 @media screen and (max-width: 768px) {

@@ -14,7 +14,7 @@
 		<img class="header__logo" src="images/SVG/Vector.svg" alt="Логотип 'Mesto Russia'">
 		<div class="hader__line"></div>
 	</header>
-	<div class="popup popup_opened">
+	<div class="popup">
 		<div class="popup__conteiner">
 			<img class="popup__cros" src="images/SVG/Close Icon.svg" alt="Крест">
 			<h2 class="popup__title">Редактировать профиль</h2>
@@ -27,8 +27,10 @@
 		<section class="profile">
 			<img class="profile__avatar" src="images/Kusto-min.png" alt="Фото Кусто">
 			<div class="profile__info">
-				<h1 class="profile__tittle">Жак-Ив Кусто</h1>
-				<button class="profile__edit-button"><img class="profile__img-pen" src="images/SVG/Перо.svg" alt="Ручка"></button>
+				<div class="profile__info-header">
+					<h4 class="profile__tittle">Жак-Ив Кусто</h4>
+					<button class="profile__edit-button"><img class="profile__img-pen" src="images/SVG/Перо.svg" alt="Ручка"></button>
+				</div>
 				<p class="profile__text">Исследователь океана</p>
 			</div>
 			<button class="profile__add-button"><img class="profile__img-cross" src="images/SVG/Крест.svg" alt="Крест"></button>
@@ -38,42 +40,42 @@
 				<img class="element__mask-group" src="images/Karachaevsc.png" alt="Старый храм">
 				<div class="element__rectangle">
 					<h2 class="element__title">Карачаевск</h2>
-					<button class="element__group"><img class="element__heart" src="images/SVG/heart.svg" alt="Сердце"></button>
+					<button class="element__group"></button>
 				</div>
 			</div>
 			<div class="element">
 				<img class="element__mask-group" src="images/elbrus.png" alt="Гора Эльбрус">
 				<div class="element__rectangle">
 					<h2 class="element__title">Гора Эльбрус</h2>
-					<button class="element__group"><img class="element__heart" src="images/SVG/heart.svg" alt="Сердце"></button>
+					<button class="element__group"></button>
 				</div>
 			</div>
 			<div class="element">
 				<img class="element__mask-group" src="images/dombay.png" alt="Гора Домбай">
 				<div class="element__rectangle">
 					<h2 class="element__title">Домбай</h2>
-					<button class="element__group"><img class="element__heart" src="images/SVG/heart.svg" alt="Сердце"></button></button>
+					<button class="element__group"></button>
 				</div>
 			</div>
 			<div class="element">
 				<img class="element__mask-group" src="images/elbrus.png" alt="Гора Эльбрус">
 				<div class="element__rectangle">
 					<h2 class="element__title">Гора Эльбрус</h2>
-					<button class="element__group"><img class="element__heart" src="images/SVG/heart.svg" alt="Сердце"></button>
+					<button class="element__group"></button>
 				</div>
 			</div>
 			<div class="element">
 				<img class="element__mask-group" src="images/dombay.png" alt="Гора Домбай">
 				<div class="element__rectangle">
 					<h2 class="element__title">Домбай</h2>
-					<button class="element__group"><img class="element__heart" src="images/SVG/heart.svg" alt="Сердце"></button>
+					<button class="element__group"></button>
 				</div>
 			</div>
 			<div class="element">
 				<img class="element__mask-group" src="images/Karachaevsc.png" alt="Старый храм">
 				<div class="element__rectangle">
 					<h2 class="element__title">Карачаево-Черкессия</h2>
-					<button class="element__group"><img class="element__heart" src="images/SVG/heart.svg" alt="Сердце"></button>
+					<button class="element__group"></button>
 				</div>
 			</div>
 		</section>
@@ -81,5 +83,6 @@
 	<footer class="footer">
 		<div class="footer__text">&copy; 2020 Mesto Russia</div>
 	</footer>
+	<script src="script.js"></script>
 </body>
 </html>
