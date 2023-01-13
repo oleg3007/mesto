@@ -13,4 +13,4 @@
 
 ### Перейти на сайт
 
-* [Mecto](oleg3007.github.io.)
+* [Mecto](https://oleg3007.github.io/mesto/)
