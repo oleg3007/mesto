@@ -1,9 +1,11 @@
 .element__title {
-  max-width: 190px;
+  max-width: 390px;
   font-size: 24px;
   font-weight: 900;
   line-height: 29px;
+	margin: 22px 63px 25px 21px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
+

@@ -1,16 +1,15 @@
 .element__group {
   background-image: url(../../../images/SVG/heart.svg);
-  margin: 27px 0 0 30px;
+	background-repeat: repeat;
   width: 22px;
   height: 19px;
   padding: 0;
   border: none;
-  font: inherit;
-  color: inherit;
   background-color: transparent;
   cursor: pointer;
-  position: relative;
-  fill: #000;
+	position: absolute;
+	right: 20px;
+	bottom: 31px;
 }
 
 .element__group:hover {

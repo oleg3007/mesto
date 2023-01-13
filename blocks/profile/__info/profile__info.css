@@ -3,13 +3,14 @@
   flex-direction: column;
   flex-wrap: wrap;
   padding-top: 10px;
-  max-width: 490px;
 
 }
+
 
 @media screen and (max-width: 768px) {
   .profile__info {
     justify-content: center;
+    text-align: center;
     padding: 0;
   }
 }
