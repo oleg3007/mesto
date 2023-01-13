@@ -1,5 +1,5 @@
 .popup__your-hobby {
-  margin-bottom: 48px;
+  margin: 0 36px 48px;
 }
 
 @media screen and (max-width: 540px) {
