@@ -11,9 +11,3 @@
   outline: none;
   border: 2px solid rgb(70, 70, 223);
 }
-
-@media screen and (max-width: 540px) {
-  .popup__hield {
-    margin: 0 22px;
-  }
-}
