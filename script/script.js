@@ -9,7 +9,7 @@ let popupCros = popup.querySelector('.popup__cros');
 
 
 let elements = main.querySelector('.elements');
-let elementGroup = elements.querySelectorAll('.element .element__rectangle .element__group');
+let elementGroup = elements.querySelectorAll('.element .element__group');
 
 function popupActiv (){
 	popup.classList.toggle('popup__opened');
