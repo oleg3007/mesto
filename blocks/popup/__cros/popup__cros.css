@@ -1,10 +1,13 @@
 .popup__cros {
+  display: block;
+  background-image: url(../../../images/SVG/Close_Icon.svg);
   width: 32px;
   height: 32px;
-  position: absolute;
-  top: -40px;
-  right: -40px;
+  border: none;
+  background-color: transparent;
   cursor: pointer;
+  margin-left: 438px;
+  margin-top: -40px;
 }
 
 .popup__cros:hover {
@@ -15,7 +18,6 @@
   .popup__cros {
     width: 20px;
     height: 20px;
-    top: -36px;
-    right: 0;
+    margin: -36px 0 0 262px;
   }
 }

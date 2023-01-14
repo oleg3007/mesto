@@ -4,15 +4,12 @@
   width: 430px;
   height: 330px;
   background-color: #fff;
-  margin-top: 215px;
   border-radius: 10px;
-  position: relative;
 }
 
 @media screen and (max-width: 540px) {
   .popup__conteiner {
     width: 282px;
     height: 322px;
-    margin-top: 141px;
   }
 }
