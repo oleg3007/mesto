@@ -1,9 +1,11 @@
 .profile__edit-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
   width: 24px;
   height: 24px;
   border: 1px solid #fff;
   background-color: #000;
-  position: relative;
   margin-bottom: 8px;
   cursor: pointer;
 }
