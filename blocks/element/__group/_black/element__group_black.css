@@ -1,6 +1,5 @@
 .element__group_black {
   background-image: url(../../../../images/SVG/heart-black.svg);
-  margin: 27px 0 0 30px;
   width: 22px;
   height: 19px;
   padding: 0;
@@ -8,5 +7,4 @@
   background-color: transparent;
   cursor: pointer;
   margin: 6px 22px 0 0;
-
 }
