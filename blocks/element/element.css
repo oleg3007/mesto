@@ -1,6 +1,12 @@
 .element {
+	display: grid;
+	grid-template-columns: minmax(100px, 1fr) 43px;
+	grid-template-rows: auto auto;
+	grid-template-areas: 
+		"img img"
+		"text hearrt";
+	row-gap: 25px;
   min-height: 361px;
   background-color: #fff;
   border-radius: 10px;
-	position: relative;
 }
