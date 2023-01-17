@@ -1,6 +1,0 @@
-.element__heart {
-  transform: translate(-50%, -50%);
-  position: absolute;
-  fill: #000;
-	grid-area: heart;
-}
