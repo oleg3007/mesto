@@ -17,12 +17,12 @@ function popupActiv (){
 }
 
 function handleFormSubmit(evt) {
-	let popupName = popup.querySelector('.popup__name').value;
-	let popupYourHobby = popup.querySelector('.popup__your-hobby').value;
+	let popupName = popup.querySelector('.popup__hield_name').value;
+	let popupYourHobby = popup.querySelector('.popup__hield_About-me').value;
 	let profileTittle = document.querySelector('.profile__tittle');
 	let profileText = document.querySelector('.profile__text');
-	profileTittle.innerHTML = popupName;
-	profileText.innerHTML = popupYourHobby;
+	profileTittle.textContent = popupName;
+	profileText.textContent = popupYourHobby;
 }
 
 popupButton.addEventListener('click', function(){
