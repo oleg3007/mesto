@@ -12,8 +12,7 @@ let elements = main.querySelector('.elements');
 let elementGroup = elements.querySelectorAll('.element .element__group');
 
 function popupActiv (){
-	popup.classList.toggle('popup__opened');
-	popup.classList.toggle('popup');
+	popup.classList.toggle('popup-opened');
 }
 
 function handleFormSubmit(evt) {
@@ -40,6 +39,6 @@ for (i = 0; i < elementGroup.length; i++){
 }
 
 function clickGroup(){
-	this.classList.toggle('element__group_black');
+	this.classList.toggle('element__group_color_black');
 }
 elementGroup.onclick = clickGroup;
