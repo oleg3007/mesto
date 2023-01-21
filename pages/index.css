@@ -12,8 +12,7 @@
 @import url(../blocks/popup/__cros/popup__cros.css);
 @import url(../blocks/popup/__conteiner/popup__conteiner.css);
 @import url(../blocks/popup/popup.css);
-
-@import url(../blocks/popup-opened/popup-opened.css);
+@import url(../blocks/popup/_active/popup_active.css);
 
 @import url(../blocks/profile/__img-cross/profile__img-cross.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
