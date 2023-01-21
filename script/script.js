@@ -13,14 +13,14 @@ let formElement = document.querySelector('.popup__conteiner');
 function popupActiv (evt){
 	evt.preventDefault();
 	popup.querySelector('.popup__hield_name').value = profileTittle.textContent;
-	popup.querySelector('.popup__hield_About-me').value = profileText.textContent;
+	popup.querySelector('.popup__hield_about-me').value = profileText.textContent;
 	popup.classList.add('popup_active');
 }
 
 function handleFormSubmit(evt) {
 	evt.preventDefault();
 	profileTittle.textContent = popup.querySelector('.popup__hield_name').value;
-	profileText.textContent = popup.querySelector('.popup__hield_About-me').value;
+	profileText.textContent = popup.querySelector('.popup__hield_about-me').value;
 	popup.classList.remove('popup_active');
 
 }
