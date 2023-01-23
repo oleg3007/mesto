@@ -1,4 +1,5 @@
 .popup__button {
+	display: block;
   width: 358px;
   height: 50px;
   background-color: #000;
