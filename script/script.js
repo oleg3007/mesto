@@ -6,27 +6,25 @@ let profileEditButton = profile.querySelector('.profile__edit-button');
 let popupButton = document.querySelector('.popup__button');
 let popup = document.querySelector('.popup');
 let popupCros = popup.querySelector('.popup__cros');
+let popupHieldName = popup.querySelector('.popup__hield_name');
+let popupHieldAboutMe = popup.querySelector('.popup__hield_about-me');
 let profileTittle = document.querySelector('.profile__tittle');
 let profileText = document.querySelector('.profile__text');
 let formElement = document.querySelector('.popup__conteiner');
 
-function popupActiv (evt){
-	evt.preventDefault();
-	popup.querySelector('.popup__hield_name').value = profileTittle.textContent;
-	popup.querySelector('.popup__hield_about-me').value = profileText.textContent;
+function popupActiv (){
+	popupHieldName.value = profileTittle.textContent;
+	popupHieldAboutMe.value = profileText.textContent;
 	popup.classList.add('popup_active');
 }
-
+function popupRemove() {
+	popup.classList.remove('popup_active');
+}
 function handleFormSubmit(evt) {
 	evt.preventDefault();
-	profileTittle.textContent = popup.querySelector('.popup__hield_name').value;
-	profileText.textContent = popup.querySelector('.popup__hield_about-me').value;
-	popup.classList.remove('popup_active');
-
-}
-function popupRemove(evt){
-	evt.preventDefault();
-	popup.classList.remove('popup_active');
+	profileTittle.textContent = popupHieldName.value;
+	profileText.textContent = popupHieldAboutMe.value;
+	popupRemove();
 }
 
 popupCros.onclick = popupRemove;
