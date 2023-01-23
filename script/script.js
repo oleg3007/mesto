@@ -8,21 +8,24 @@ let popup = document.querySelector('.popup');
 let popupCros = popup.querySelector('.popup__cros');
 let popupHieldName = popup.querySelector('.popup__hield_enter_name');
 let popupHieldAboutMe = popup.querySelector('.popup__hield_enter_about-me');
-let profileTittle = document.querySelector('.profile__tittle');
+let profileTitle = document.querySelector('.profile__title');
 let profileText = document.querySelector('.profile__text');
 let formElement = document.querySelector('.popup__conteiner');
 
 function popupActiv (){
-	popupHieldName.value = profileTittle.textContent;
+	popupHieldName.value = profileTitle.textContent;
 	popupHieldAboutMe.value = profileText.textContent;
 	popup.classList.add('popup_active');
 }
+
+
 function popupRemove() {
 	popup.classList.remove('popup_active');
 }
+
 function handleFormSubmit(evt) {
 	evt.preventDefault();
-	profileTittle.textContent = popupHieldName.value;
+	profileTitle.textContent = popupHieldName.value;
 	profileText.textContent = popupHieldAboutMe.value;
 	popupRemove();
 }
