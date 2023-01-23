@@ -18,7 +18,7 @@
 			<img class="profile__avatar" src="images/Kusto-min.png" alt="Фото Кусто">
 			<div class="profile__info">
 				<div class="profile__info-header">
-					<h1 class="profile__tittle">Жак-Ив Кусто</h1>
+					<h1 class="profile__title">Жак-Ив Кусто</h1>
 					<button class="profile__edit-button" type="button"><img class="profile__img-pen" src="images/SVG/Перо.svg" alt="Ручка"></button>
 				</div>
 				<p class="profile__text">Исследователь океана</p>
@@ -62,13 +62,15 @@
 		<p class="footer__text">&copy; 2020 Mesto Russia</p>
 	</footer>
 	<div class="popup">
-		<form name="userInformation" class="popup__conteiner" method="post">
+		<div class="popup__conteiner">
 			<button class="popup__cros" type="button"></button>
 			<h2 class="popup__title">Редактировать профиль</h2>
-			<input class="popup__hield popup__hield_name" type="text" name="Name" placeholder="Имя" value="">
-			<input class="popup__hield popup__hield_about-me" type="text" name="About-me" placeholder="О себе">
-			<button class="popup__button" type="submit">Сохранить</button>
-		</form>
+			<form name="userInformation" class="popup__form" method="post">
+				<input class="popup__hield popup__hield_enter_name" type="text" name="Name" placeholder="Имя">
+				<input class="popup__hield popup__hield_enter_about-me" type="text" name="About-me" placeholder="О себе">
+				<button class="popup__button" type="submit">Сохранить</button>
+			</form>
+		</div>
 	</div>
 	<script src="script/script.js"></script>
 </body>
