@@ -32,20 +32,9 @@
 @import url(../blocks/element/__rectangle/element__rectangle.css);
 @import url(../blocks/element/__mask-group/element__mask-group.css);
 @import url(../blocks/element/__group/_color/element__group_color_black.css);
+@import url(../blocks/element/__trash/element__trash.css);
 @import url(../blocks/element/element.css);
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__text/footer__text.css);
 
-.element__trash {
-  background-image: url(../images/SVG/trash.svg);
-  width: 18px;
-  height: 19px;
-  position: absolute;
-  right: 20px;
-  top: 20px;
-}
-
-.element__trash:hover {
-  opacity: 50%;
-}
