@@ -22,6 +22,7 @@ let popupItemButton = document.querySelector('.popup-item__button');
 let elements = main.querySelector('.elements');
 let element = elements.querySelector('.element');
 
+let popupImage = document.querySelector('.popup-image')
 
 function popupActiv (){
 	popupHieldName.value = profileTitle.textContent;
@@ -33,6 +34,7 @@ function popupActiv (){
 function popupRemove() {
 	popup.classList.remove('popup_active');
 	popupItem.classList.remove('popup_active');
+	popupImage.classList.remove('popup_active');
 }
 function popupItemActiv() {
 	popupItem.classList.add('popup_active');
@@ -59,15 +61,20 @@ function addElement (linkElement, titleElement) {
 	element.querySelector('.element__trash').addEventListener('click', function () {
 			element.remove();
 	});
-	// https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg
+	
+	element.querySelector('.element__mask-group').addEventListener('click', function(){
+		popupImage.classList.add('popup_active');
+		popupImage.querySelector('.popup-image__foto').src = linkElement;
+		popupImage.querySelector('.popup-image__signature').textContent = titleElement;
+	})
 
 	elements.prepend(element);  
-
+	popupImage.querySelector('.popup__cros').onclick = popupRemove;
 	popupRemove();
 }
 
 
-
+document.querySelector('.popup__cros').onclick = popupRemove;
 popupCros.onclick = popupRemove;
 popupCrosItem.onclick = popupRemove;
 profileEditButton.onclick = popupActiv;
