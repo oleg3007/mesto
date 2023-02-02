@@ -52,7 +52,9 @@ function addElement (linkElement, titleElement) {
 	element.querySelector('.element__mask-group').src = linkElement; // заполняем
 	element.querySelector('.element__title').textContent = titleElement;
 
-		
+	element.querySelector('.element__group').addEventListener('click', function (evt) {
+		evt.target.classList.toggle('element__group_color_black');
+	})
 
 	element.querySelector('.element__trash').addEventListener('click', function () {
 			element.remove();
