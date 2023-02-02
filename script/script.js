@@ -20,6 +20,8 @@ let popupItem = document.querySelector('.popup-item');
 let popupItemButton = document.querySelector('.popup-item__button');
 
 let elements = main.querySelector('.elements');
+let element = elements.querySelector('.element');
+
 
 function popupActiv (){
 	popupHieldName.value = profileTitle.textContent;
@@ -50,13 +52,19 @@ function addElement (linkElement, titleElement) {
 	element.querySelector('.element__mask-group').src = linkElement; // заполняем
 	element.querySelector('.element__title').textContent = titleElement;
 
-	// songElement.querySelector('.song__like').addEventListener('click', function (evt) { // На сердечко повесили событие
-	// 	//console.log(event);
-	// 	evt.target.classList.toggle('song__like_active');
-	// });	
-	elements.prepend(element);  // .... и ставим в конец контейнера.
+		
+
+	element.querySelector('.element__trash').addEventListener('click', function () {
+			element.remove();
+	});
+	// https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg
+
+	elements.prepend(element);  
+
 	popupRemove();
 }
+
+
 
 popupCros.onclick = popupRemove;
 popupCrosItem.onclick = popupRemove;
