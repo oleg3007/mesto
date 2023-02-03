@@ -1,0 +1,23 @@
+.popup-image__cros {
+  display: block;
+  background-image: url(../../../images/SVG/Close_Icon.svg);
+  background-size: cover;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+	margin-right: -40px;
+}
+
+.popup-image__cros:hover {
+  opacity: .6;
+}
+
+@media screen and (max-width: 540px) {
+  .popup-image__cros {
+    width: 20px;
+    height: 20px;
+		margin: 0;
+  }
+}

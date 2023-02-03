@@ -69,7 +69,7 @@ function addElement (linkElement, titleElement) {
 	})
 
 	elements.prepend(element);  
-	popupImage.querySelector('.popup__cros').onclick = popupRemove;
+	popupImage.querySelector('.popup-image__cros').onclick = popupRemove;
 	popupRemove();
 }
 

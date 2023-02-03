@@ -1,11 +1,5 @@
 .popup-image__conteiner {
   display: flex;
   flex-direction: column;
-  width: 430px;
-}
-
-@media screen and (max-width: 540px) {
-  .popup-image__conteiner {
-    width: 282px;
-  }
+	align-items: end
 }
