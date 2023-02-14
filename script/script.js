@@ -25,8 +25,7 @@ const popupItemButton = document.querySelector('.popup-item__button');
 
 const elements = main.querySelector('.elements');
 
-const eventCard = document.querySelector('#event-card');
-const element = eventCard.querySelector('.element');
+const eventCard = document.querySelector('#event-card').content.querySelector('.element');
 
 const popupImage = document.querySelector('.popup-image');
 const popupImageCros = popupImage.querySelector('.popup-image__cros');
@@ -66,43 +65,13 @@ function openPopupImage(titleElement, linkElement) {
 	popupActiv(popupImage);
 }
 
-// создание карточки
-function addElement (linkElement, titleElement) {
-	const eventCard = document.querySelector('#event-card').content;  
-	const element = eventCard.querySelector('.element').cloneNode(true);
-
-	element.querySelector('.element__mask-group').src = linkElement;
-	element.querySelector('.element__mask-group').alt = titleElement; 
-	element.querySelector('.element__title').textContent = titleElement;
-	// Сердечка (лайк)
-	element.querySelector('.element__group').addEventListener('click', function (evt) {
-		evt.target.classList.toggle('element__group_color_black');
-	})
-	// Урна (удаление)
-	element.querySelector('.element__trash').addEventListener('click', function () {
-			element.remove();
-	})
-
-	element.querySelector('.element__mask-group').addEventListener('click', function() { 
-
-		openPopupImage(titleElement, linkElement);
-})
-	return element
-}
-
 popupCros.addEventListener('click', () => popupRemove(popupProfile));
 popupCrosItem.addEventListener('click', () => popupRemove(popupItem));
 popupImageCros.addEventListener('click', () => popupRemove(popupImage));
 
 formElement.addEventListener('submit', handleFormSubmit); 
 
-// popup-item передача аргументов addElement
- popupItemButton.addEventListener('click', function (){
-	elements.prepend(addElement(popupItemLink.value, popupItemTitle.value));
-	popupItemTitle.value = '';
-	popupItemLink.value = '';
-	popupRemove(popupItem);
-})
+
 
 const initialCards = [
 	{
@@ -130,7 +99,47 @@ const initialCards = [
 		link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
 	}
 ];
+renderCards(initialCards);
 
-for (let i = 0; i < 6; i++) {
-	elements.prepend(addElement(initialCards[i].link, initialCards[i].name));
+// Размещение карточки
+function renderCards(items) {
+	const cards = items.map((item) => {
+		return createCard(item);
+	});
+	elements.prepend(...cards);
 }
+
+// Заполнение карточки
+function createCard (item) {
+	const card = eventCard.cloneNode(true);
+
+	card.querySelector('.element__mask-group').src = item.link;
+	card.querySelector('.element__mask-group').alt = item.name;
+	card.querySelector('.element__title').textContent = item.name;
+	// Сердечка (лайк)
+	card.querySelector('.element__group').addEventListener('click', function (evt) {
+		evt.target.classList.toggle('element__group_color_black');
+	})
+	// Урна (удаление)
+	card.querySelector('.element__trash').addEventListener('click', function () {
+		card.remove();
+	})
+	card.querySelector('.element__mask-group').addEventListener('click', function () {
+
+		openPopupImage(name, link);
+	})
+	return card
+}
+
+// Кнопка сохранение карточки
+popupItemButton.addEventListener('click', function () {
+	const name = popupItemTitle.value;
+	const link = popupItemLink.value;
+
+	const card = createCard({name: name, link: link})
+	popupItemTitle.value = '';
+	popupItemLink.value = '';
+	popupRemove(popupItem);
+	elements.prepend(card);
+})
+
