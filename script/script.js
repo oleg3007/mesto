@@ -51,7 +51,7 @@ function popupRemove(block) {
 }
 
 // Функция заполнения и закрыти popup-profile
-function handleFormSubmit(evt) {
+function formSubmit(evt) {
 	evt.preventDefault();
 	profileTitle.textContent = popupHieldName.value;
 	profileText.textContent = popupHieldAboutMe.value;
@@ -69,7 +69,7 @@ popupCros.addEventListener('click', () => popupRemove(popupProfile));
 popupCrosItem.addEventListener('click', () => popupRemove(popupItem));
 popupImageCros.addEventListener('click', () => popupRemove(popupImage));
 
-formElement.addEventListener('submit', handleFormSubmit); 
+formElement.addEventListener('submit', formSubmit); 
 
 
 

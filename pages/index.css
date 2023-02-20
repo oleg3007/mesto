@@ -6,13 +6,20 @@
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
 
+@import url(../blocks/form/__input-error/form__input-error.css);
+@import url(../blocks/form/__input-error/_field/form__input-error_field_name.css);
+@import url(../blocks/form/__input/form__input.css);
+
 @import url(../blocks/popup/__button/popup__button.css);
+@import url(../blocks/popup/__button/_disabled/popup__button_disabled.css);
 @import url(../blocks/popup/__hield/popup__hield.css);
+@import url(../blocks/popup/__hield/_type/popup__hield_type_error.css);
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__cros/popup__cros.css);
 @import url(../blocks/popup/__conteiner/popup__conteiner.css);
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_active/popup_active.css);
+@import url(../blocks/popup/__form/popup__form.css);
 
 @import url(../blocks/profile/__img-cross/profile__img-cross.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);

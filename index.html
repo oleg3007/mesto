@@ -35,9 +35,33 @@
 		<div class="popup__conteiner">
 			<button class="popup__cros" type="button"></button>
 			<h2 class="popup__title">Редактировать профиль</h2>
-			<form name="userInformation" class="popup__form" method="post">
-				<input class="popup__hield popup__hield_enter_name" type="text" name="Name" placeholder="Имя">
-				<input class="popup__hield popup__hield_enter_about-me" type="text" name="About-me" placeholder="О себе">
+			<form name="place" class="popup__form" method="post" novalidate>
+				<div class="form__input">
+					<input 
+						class="popup__hield popup__hield_enter_name" 
+						type="text" 
+						name="name" 
+						placeholder="Имя"
+						tabindex="1"
+						minlength="2"
+						maxlength="40"
+						required
+					/>
+					<span class="form__input-error form__input-error_field_name"></span>
+				</div>
+				<div class="form__input">
+					<input 
+						class="popup__hield popup__hield_enter_about-me" 
+						type="text" 
+						name="about-me" 
+						placeholder="О себе"
+						tabindex="2"
+						minlength="2"
+						maxlength="200"
+						required
+					/>
+					<span class="form__input-error form__input-error_field_about-me"></span>
+				</div>
 				<button class="popup__button" type="submit">Сохранить</button>
 			</form>
 		</div>
@@ -46,10 +70,31 @@
 		<div class="popup__conteiner">
 			<button class="popup__cros popup-item__cros" type="button"></button>
 			<h2 class="popup__title">Новое место</h2>
-			<form name="userInformation" class="popup__form" method="post">
-				<input class="popup__hield popup__hield_enter_title" type="text" name="Name" placeholder="Название">
-				<input class="popup__hield popup__hield_enter_link" type="text" name="About-me" placeholder="Ссылка на картинку">
-				<button class="popup__button popup-item__button" type="button">Создать</button>
+			<form name="place" class="popup__form" method="post" novalidate>
+				<div class="form__input">
+					<input 
+						class="popup__hield popup__hield_enter_title" 
+						type="text" 
+						name="place-name" 
+						placeholder="Название"
+						tabindex="1"
+						minlength="2"
+						maxlength="30"
+						required
+					/>
+					<span class="form__input-error form__input-error_field_place-name"></span>
+				</div>
+				<div class="form__input">
+					<input 
+						class="popup__hield popup__hield_enter_link" 
+						type="URL" 
+						name="link" 
+						placeholder="Ссылка на картинку"
+						required
+					/>
+					<span class="form__input-error form__input-error_field_link"></span>
+				</div>
+				<button class="popup__button popup-item__button popup__button_disabled" type="submit" disabled>Создать</button>
 			</form>
 		</div>
 	</div>
@@ -69,5 +114,6 @@
 			</article>
 	</template>
 	<script src="script/script.js"></script>
+	<script src="script/validate.js"></script>
 </body>
 </html>

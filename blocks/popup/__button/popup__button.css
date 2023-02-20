@@ -8,10 +8,11 @@
   line-height: 22px;
 	font-weight: 400;
   text-align: center;
-  margin: 29px auto 37px;
+  margin: 47px auto 37px;
   cursor: pointer;
 	border: none;
 	outline: none;
+	border-radius: 2px;
 }
 
 .popup__button:hover {
