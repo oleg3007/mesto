@@ -45,6 +45,7 @@ profileEditButton.addEventListener('click', function () {
 	popupActiv(popupProfile);
 })
 
+
 // Функциb закрытия popup
 function popupRemove(block) {
 	block.classList.remove('popup_active');
@@ -64,13 +65,36 @@ function openPopupImage(titleElement, linkElement) {
 	popupImageSignature.textContent = titleElement;
 	popupActiv(popupImage);
 }
+// Закрытие popup кнопкой 'Escate'
+function popupOffEscape (block){
+document.addEventListener('keydown', (evt) => {
+	if (evt.key === 'Escape') {
+		popupRemove(block);
+		}
+	});
+}
+// Закрытие popup левой кнопкой 'мыши'
+function closingWithTheMouse (block) {
+	block.addEventListener('click', (evt) => {
+		console.log('работает');
+		popupRemove(block);
+	})
+};
+
+closingWithTheMouse(popupProfile);
+closingWithTheMouse(popupItem);
+closingWithTheMouse(popupImage);
+
+popupOffEscape(popupProfile);
+popupOffEscape(popupItem);
+popupOffEscape(popupImage);
 
 popupCros.addEventListener('click', () => popupRemove(popupProfile));
 popupCrosItem.addEventListener('click', () => popupRemove(popupItem));
 popupImageCros.addEventListener('click', () => popupRemove(popupImage));
 
-formElement.addEventListener('submit', formSubmit); 
 
+formElement.addEventListener('submit', formSubmit); 
 
 
 const initialCards = [
@@ -126,7 +150,7 @@ function createCard (item) {
 	})
 	card.querySelector('.element__mask-group').addEventListener('click', function () {
 
-		openPopupImage(name, link);
+		openPopupImage(item.name, item.link);
 	})
 	return card
 }
