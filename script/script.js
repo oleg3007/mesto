@@ -75,9 +75,10 @@ document.addEventListener('keydown', (evt) => {
 }
 // Закрытие popup левой кнопкой 'мыши'
 function closingWithTheMouse (block) {
-	block.addEventListener('click', (evt) => {
-		console.log('работает');
-		popupRemove(block);
+	block.addEventListener('click', (e) => {
+		if (e.target === block){
+			popupRemove(block)
+		}	
 	})
 };
 

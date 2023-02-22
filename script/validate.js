@@ -44,7 +44,7 @@ const hasInvanLidInput = (inputs) => {
 
 const handleFormInput = (evt, form, inputErrorClass, inputs, buttons, inactiveButtonClass) => {
 	const input = evt.target;
-	const errorElement = form.querySelector(`.form__input-error_field_${input.name}`);
+	const errorElement = form.querySelector(`.popup__form-input-error_field_${input.name}`);
 	determiningValidityInput(input, errorElement, inputErrorClass);
 	const buttonState = hasInvanLidInput (inputs);
 	buttons.forEach((button) => {

@@ -4,6 +4,7 @@
   width: 430px;
   background-color: #fff;
   border-radius: 10px;
+	position: static;
 }
 
 @media screen and (max-width: 540px) {
