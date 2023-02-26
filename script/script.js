@@ -42,7 +42,6 @@ function popupOffEscape(evt) {
 	const active = document.querySelector('.popup_active');
 	if (evt.key === 'Escape') {
 		popupRemove(active);
-		console.log('работает');
 	}
 }
 // Функциb закрытия popup
@@ -51,7 +50,10 @@ function popupRemove(block) {
 	document.removeEventListener('keydown', popupOffEscape);
 }
 
-profileAddButton.addEventListener('click', () => activPopup(popupItem));
+profileAddButton.addEventListener('click', () => { 
+	activPopup(popupItem); 
+	lockButton(popupItem, config)
+});
 
 profileEditButton.addEventListener('click', function () {
 	popupHieldName.value = profileTitle.textContent;

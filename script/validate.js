@@ -1,40 +1,52 @@
+
+const lockButton = (block, config) => {
+	const button = block.querySelector(config.submitButtonSelector);
+	button.classList.add(config.inactiveButtonClass);
+	button.disabled = true;
+}
+
 // отоброжение ошибки
-const showInputError = (input, errorElement, inputErrorClass) => {
-	input.classList.add(inputErrorClass);
+const showInputError = (input, errorElement, config) => {
+	input.classList.add(config.inputErrorClass);
 	errorElement.textContent = input.validationMessage;
 }
 // Скрытие ошибки
-const fandInputError = (input, errorElement, inputErrorClass) => {
-	input.classList.remove(inputErrorClass);
+const fandInputError = (input, errorElement, config) => {
+	input.classList.remove(config.inputErrorClass);
 	errorElement.textContent = "";
 }
 // Опредиление валиндости поля
-const determiningValidityInput = (input, errorElement, inputErrorClass) => {
+const determiningValidityInput = (input, errorElement, config) => {
 	if (input.validity.valid) {
-		fandInputError(input, errorElement, inputErrorClass);
+		fandInputError(input, errorElement, config);
 	} else {
-		showInputError(input, errorElement, inputErrorClass);
+		showInputError(input, errorElement, config);
 	}
 };
 
 
+// const lockButton = (block) => {
+// 	const button = block.querySelector('.popup__button');
+// 	button.classList.add('popup__button_disabled');
+// 	button.disabled = true;
+// }
 
 // Включение кнопки
-const enabledButton = (buttons, inactiveButtonClass) =>{
-	buttons.classList.remove(inactiveButtonClass);
+const enabledButton = (buttons, config) => {
+	buttons.classList.remove(config.inactiveButtonClass);
 	buttons.disabled = false;
 }
 // Отключение кнопки
-const powerOffButton = (button, inactiveButtonClass) => {
-	button.classList.add(inactiveButtonClass);
+const powerOffButton = (button, config) => {
+	button.classList.add(config.inactiveButtonClass);
 	button.disabled = true;
 }
 // Проверка на валидность для кнопки
-const toggleButtonState = (button, inactiveButtonClass, buttonState) =>{
+const toggleButtonState = (button, config, buttonState) =>{
 	if (buttonState) {
-		powerOffButton(button, inactiveButtonClass);
+		powerOffButton(button, config);
 	} else {
-		enabledButton(button, inactiveButtonClass);
+		enabledButton(button, config);
 	}
 }
 
@@ -42,50 +54,44 @@ const hasInvanLidInput = (inputs) => {
 	return inputs.some((input) => !input.validity.valid)
 }
 
-const handleFormInput = (evt, form, inputErrorClass, inputs, buttons, inactiveButtonClass) => {
+const handleFormInput = (evt, form, inputs, buttons, config) => {
 	const input = evt.target;
-	const errorElement = form.querySelector(`.popup__form-input-error_field_${input.name}`);
-	determiningValidityInput(input, errorElement, inputErrorClass);
+	const errorElement = form.querySelector(`.popup__form-input-error_field_${evt.target.name}`);
+	determiningValidityInput(input, errorElement, config);
 	const buttonState = hasInvanLidInput (inputs);
 	buttons.forEach((button) => {
-		button.addEventListener('submit', toggleButtonState(button, inactiveButtonClass, buttonState))
-	}) 
+		button.addEventListener('submit', toggleButtonState(button, config, buttonState));
+	})
 }
 
 const handleFormSubmit = (evt) => {
 	evt.preventDefault();
 }
 
-const enableValidation = ({ 
-	formSelector, 
-	inputSelector, 
-	inputErrorClass, 
-	submitButtonSelector,
-	inactiveButtonClass
-}) => {
-	const forms = Array.from(document.querySelectorAll(formSelector));
-		forms.forEach((form) => {
-			form.addEventListener('submit', handleFormSubmit);
-			const buttons = Array.from(form.querySelectorAll(submitButtonSelector));
-			const inputs = Array.from(form.querySelectorAll(inputSelector))
-			inputs.forEach((inputElement) => {
-				inputElement.addEventListener('input', (evt) => handleFormInput(
-					evt, 
-					form, 
-					inputErrorClass,
-					inputs, 
-					buttons, 
-					inactiveButtonClass
-					));
-			})
+const enableValidation = (config) => {
+	const forms = Array.from(document.querySelectorAll(config.formSelector));
+	forms.forEach((form) => {
+		form.addEventListener('submit', handleFormSubmit);
+		const buttons = Array.from(form.querySelectorAll(config.submitButtonSelector));
+		const inputs = Array.from(form.querySelectorAll(config.inputSelector))
+		inputs.forEach((inputElement) => {
+			inputElement.addEventListener('input', (evt) => handleFormInput(
+				evt, 
+				form, 
+				inputs, 
+				buttons, 
+				config
+			));
 		})
-	};
-
-enableValidation ({
+	})
+};
+const config = {
 	formSelector: '.popup__form',
 	inputSelector: '.popup__hield',
 	submitButtonSelector: '.popup__button',
 	inactiveButtonClass: 'popup__button_disabled',
 	inputErrorClass: 'popup__hield_type_error',
 	errorClass: 'popup__error_visible'
-}); 
+}
+enableValidation(config);
+
