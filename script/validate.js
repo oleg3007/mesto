@@ -54,10 +54,9 @@ const hasInvanLidInput = (inputs) => {
 	return inputs.some((input) => !input.validity.valid)
 }
 
-const handleFormInput = (evt, form, inputs, buttons, config) => {
-	const input = evt.target;
-	const errorElement = form.querySelector(`.popup__form-input-error_field_${evt.target.name}`);
-	determiningValidityInput(input, errorElement, config);
+const handleFormInput = (inputElement, form, inputs, buttons, config) => {
+	const errorElement = form.querySelector(`.popup__form-input-error_field_${inputElement.name}`);
+	determiningValidityInput(inputElement, errorElement, config);
 	const buttonState = hasInvanLidInput (inputs);
 	buttons.forEach((button) => {
 		button.addEventListener('submit', toggleButtonState(button, config, buttonState));
@@ -76,7 +75,7 @@ const enableValidation = (config) => {
 		const inputs = Array.from(form.querySelectorAll(config.inputSelector))
 		inputs.forEach((inputElement) => {
 			inputElement.addEventListener('input', (evt) => handleFormInput(
-				evt, 
+				inputElement, 
 				form, 
 				inputs, 
 				buttons, 
