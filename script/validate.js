@@ -1,4 +1,3 @@
-
 const lockButton = (block, config) => {
 	const button = block.querySelector(config.submitButtonSelector);
 	button.classList.add(config.inactiveButtonClass);
@@ -23,13 +22,6 @@ const determiningValidityInput = (input, errorElement, config) => {
 		showInputError(input, errorElement, config);
 	}
 };
-
-
-// const lockButton = (block) => {
-// 	const button = block.querySelector('.popup__button');
-// 	button.classList.add('popup__button_disabled');
-// 	button.disabled = true;
-// }
 
 // Включение кнопки
 const enabledButton = (buttons, config) => {

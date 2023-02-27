@@ -1,4 +1,3 @@
-
 const page = document.querySelector('.page');
 const main = page.querySelector('.main');
 const popup = document.querySelector('.popup');
@@ -162,8 +161,8 @@ popupItemButton.addEventListener('click', function () {
 
 	const card = createCard({ name: name, link: link })
 	elements.prepend(card);
+	removePopup(popupItem);
 	popupItemTitle.value = '';
 	popupItemLink.value = '';
-	removePopup(popupItem);
 })
 
