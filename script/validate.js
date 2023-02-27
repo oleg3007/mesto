@@ -54,8 +54,8 @@ const hasInvanLidInput = (inputs) => {
 	return inputs.some((input) => !input.validity.valid)
 }
 
-const handleFormInput = (inputElement, form, inputs, buttons, config) => {
-	const errorElement = form.querySelector(`.popup__form-input-error_field_${inputElement.name}`);
+const handleFormInput = (inputElement, form, inputs, buttons, spanClassTypeField, config) => {
+	const errorElement = form.querySelector(`${spanClassTypeField}${inputElement.name}`);
 	determiningValidityInput(inputElement, errorElement, config);
 	const buttonState = hasInvanLidInput (inputs);
 	buttons.forEach((button) => {
@@ -78,7 +78,8 @@ const enableValidation = (config) => {
 				inputElement, 
 				form, 
 				inputs, 
-				buttons, 
+				buttons,
+				config.spanClassTypeField, 
 				config
 			));
 		})
@@ -90,7 +91,8 @@ const config = {
 	submitButtonSelector: '.popup__button',
 	inactiveButtonClass: 'popup__button_disabled',
 	inputErrorClass: 'popup__hield_type_error',
-	errorClass: 'popup__error_visible'
+	errorClass: 'popup__error_visible',
+	spanClassTypeField: '.popup__form-input-error_field_'
 }
 enableValidation(config);
 

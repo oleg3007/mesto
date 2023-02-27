@@ -35,19 +35,19 @@ const popupImageSignature = popupImage.querySelector('.popup-image__signature');
 // функция активации popup 
 function activPopup(block) {
 	block.classList.add('popup_active');
-	document.addEventListener('keydown', popupOffEscape);
+	document.addEventListener('keydown', deletePopupEscape);
 }
 // Закрытие popup кнопкой 'Escate'
-function popupOffEscape(evt) {
-	const active = document.querySelector('.popup_active');
+function deletePopupEscape(evt) {
 	if (evt.key === 'Escape') {
-		popupRemove(active);
+		const active = document.querySelector('.popup_active');
+		removePopup(active);
 	}
 }
 // Функциb закрытия popup
-function popupRemove(block) {
+function removePopup(block) {
 	block.classList.remove('popup_active');
-	document.removeEventListener('keydown', popupOffEscape);
+	document.removeEventListener('keydown', deletePopupEscape);
 }
 
 profileAddButton.addEventListener('click', () => { 
@@ -62,11 +62,11 @@ profileEditButton.addEventListener('click', function () {
 })
 
 // Функция заполнения и закрыти popup-profile
-function submitForm(evt) {
+function submitFormProfile(evt) {
 	evt.preventDefault();
 	profileTitle.textContent = popupHieldName.value;
 	profileText.textContent = popupHieldAboutMe.value;
-	popupRemove(popupProfile);
+	removePopup(popupProfile);
 }
 // popup открытия картинки
 function openPopupImage(titleElement, linkElement) {
@@ -81,7 +81,7 @@ function openPopupImage(titleElement, linkElement) {
 function closingWithTheMouse(block) {
 	block.addEventListener('click', (e) => {
 		if (e.target === block) {
-			popupRemove(block)
+			removePopup(block)
 		}
 	})
 };
@@ -89,12 +89,12 @@ closingWithTheMouse(popupProfile);
 closingWithTheMouse(popupItem);
 closingWithTheMouse(popupImage);
 
-popupCros.addEventListener('click', () => popupRemove(popupProfile));
-popupCrosItem.addEventListener('click', () => popupRemove(popupItem));
-popupImageCros.addEventListener('click', () => popupRemove(popupImage));
+popupCros.addEventListener('click', () => removePopup(popupProfile));
+popupCrosItem.addEventListener('click', () => removePopup(popupItem));
+popupImageCros.addEventListener('click', () => removePopup(popupImage));
 
 
-formElement.addEventListener('submit', submitForm);
+formElement.addEventListener('submit', submitFormProfile);
 
 
 const initialCards = [
@@ -161,10 +161,9 @@ popupItemButton.addEventListener('click', function () {
 	const link = popupItemLink.value;
 
 	const card = createCard({ name: name, link: link })
-	popupRemove(popupItem);
 	elements.prepend(card);
-
 	popupItemTitle.value = '';
 	popupItemLink.value = '';
+	removePopup(popupItem);
 })
 
