@@ -122,47 +122,57 @@ const initialCards = [
 		link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
 	}
 ];
-renderCards(initialCards);
 
-// Размещение карточки
-function renderCards(items) {
-	const cards = items.map((item) => {
-		return createCard(item);
-	});
-	elements.prepend(...cards);
-}
+// Заполнение контента карточками из шаблона 
+initialCards.forEach((item) => {
+	const card = new Card(item.name, item.link);
+	const cardElement = card.generatorCard();
 
-// Заполнение карточки
-function createCard(item) {
-	const card = eventCard.cloneNode(true);
-
-	card.querySelector('.element__mask-group').src = item.link;
-	card.querySelector('.element__mask-group').alt = item.name;
-	card.querySelector('.element__title').textContent = item.name;
-	// Сердечка (лайк)
-	card.querySelector('.element__group').addEventListener('click', function (evt) {
-		evt.target.classList.toggle('element__group_color_black');
-	})
-	// Урна (удаление)
-	card.querySelector('.element__trash').addEventListener('click', function () {
-		card.remove();
-	})
-	card.querySelector('.element__mask-group').addEventListener('click', function () {
-
-		openPopupImage(item.name, item.link);
-	})
-	return card
-}
+	document.querySelector('.elements').append(cardElement);
+})
 
 // Кнопка сохранение карточки
 popupItemButton.addEventListener('click', function () {
 	const name = popupItemTitle.value;
 	const link = popupItemLink.value;
 
-	const card = createCard({ name: name, link: link })
-	elements.prepend(card);
+	const card = new Card(name, link)
+	const cardElement = card.generatorCard();
+	elements.prepend(cardElement);
 	removePopup(popupItem);
 	popupItemTitle.value = '';
 	popupItemLink.value = '';
 })
 
+class Card {
+	constructor(name, link) {
+		this._name = name;
+		this._link = link;
+	}
+	_getTemplate() {
+		const cardElement = document.querySelector('.event-card').content.querySelector('.element').cloneNode(true);
+		return cardElement;
+	}
+	
+	generatorCard() {
+		this._element = this._getTemplate();
+
+		this._element.querySelector('.element__title').textContent = this._name;
+		this._element.querySelector('.element__mask-group').src = this._link;
+		this._hangingEvents();
+
+		return this._element;
+	}
+	// Сердце
+	_paintingOverHeart() {
+		this._element.querySelector('.element__group').classList.toggle('element__group_color_black');
+	}
+	// Удаление карточки
+	_deletingCard() {this._element.remove();}
+
+	// Навешивание событий
+	_hangingEvents() {
+		this._element.querySelector('.element__group').addEventListener('click', () => this._paintingOverHeart());
+		this._element.querySelector('.element__trash').addEventListener('click', () => this._deletingCard());
+	}
+}
