@@ -1,6 +1,9 @@
+import Card from './Card.js';
+import { lockButton, config } from './validate.js';
+import { initialCards } from './initialCards.js';
+
 const page = document.querySelector('.page');
 const main = page.querySelector('.main');
-const popup = document.querySelector('.popup');
 
 const profile = main.querySelector('.profile');
 const profileTitle = document.querySelector('.profile__title');
@@ -8,7 +11,6 @@ const profileText = document.querySelector('.profile__text');
 const profileAddButton = profile.querySelector('.profile__add-button');
 const profileEditButton = profile.querySelector('.profile__edit-button');
 
-const popupButton = document.querySelector('.popup__button');
 const popupProfile = document.querySelector('.popup-profile');
 const popupCros = popupProfile.querySelector('.popup__cros');
 const popupHieldName = popupProfile.querySelector('.popup__hield_enter_name');
@@ -23,8 +25,6 @@ const popupItemLink = popupItem.querySelector('.popup__hield_enter_link');
 const popupItemButton = document.querySelector('.popup-item__button');
 
 const elements = main.querySelector('.elements');
-
-const eventCard = document.querySelector('#event-card').content.querySelector('.element');
 
 const popupImage = document.querySelector('.popup-image');
 const popupImageCros = popupImage.querySelector('.popup-image__cros');
@@ -68,14 +68,12 @@ function submitFormProfile(evt) {
 	removePopup(popupProfile);
 }
 // popup открытия картинки
-function openPopupImage(titleElement, linkElement) {
+export function openPopupImage(titleElement, linkElement) {
 	popupImageFoto.src = linkElement;
 	popupImageFoto.alt = titleElement;
 	popupImageSignature.textContent = titleElement;
 	activPopup(popupImage);
 }
-
-
 // Закрытие popup левой кнопкой 'мыши'
 function closingWithTheMouse(block) {
 	block.addEventListener('click', (e) => {
@@ -92,36 +90,7 @@ popupCros.addEventListener('click', () => removePopup(popupProfile));
 popupCrosItem.addEventListener('click', () => removePopup(popupItem));
 popupImageCros.addEventListener('click', () => removePopup(popupImage));
 
-
 formElement.addEventListener('submit', submitFormProfile);
-
-
-const initialCards = [
-	{
-		name: 'Архыз',
-		link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-	},
-	{
-		name: 'Челябинская область',
-		link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-	},
-	{
-		name: 'Иваново',
-		link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-	},
-	{
-		name: 'Камчатка',
-		link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-	},
-	{
-		name: 'Холмогорский район',
-		link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-	},
-	{
-		name: 'Байкал',
-		link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-	}
-];
 
 // Заполнение контента карточками из шаблона 
 initialCards.forEach((item) => {
@@ -130,13 +99,12 @@ initialCards.forEach((item) => {
 
 	document.querySelector('.elements').append(cardElement);
 })
-
 // Кнопка сохранение карточки
 popupItemButton.addEventListener('click', function () {
 	const name = popupItemTitle.value;
 	const link = popupItemLink.value;
 
-	const card = new Card(name, link)
+	const card = new Card(name, link);
 	const cardElement = card.generatorCard();
 	elements.prepend(cardElement);
 	removePopup(popupItem);
@@ -144,35 +112,4 @@ popupItemButton.addEventListener('click', function () {
 	popupItemLink.value = '';
 })
 
-class Card {
-	constructor(name, link) {
-		this._name = name;
-		this._link = link;
-	}
-	_getTemplate() {
-		const cardElement = document.querySelector('.event-card').content.querySelector('.element').cloneNode(true);
-		return cardElement;
-	}
-	
-	generatorCard() {
-		this._element = this._getTemplate();
 
-		this._element.querySelector('.element__title').textContent = this._name;
-		this._element.querySelector('.element__mask-group').src = this._link;
-		this._hangingEvents();
-
-		return this._element;
-	}
-	// Сердце
-	_paintingOverHeart() {
-		this._element.querySelector('.element__group').classList.toggle('element__group_color_black');
-	}
-	// Удаление карточки
-	_deletingCard() {this._element.remove();}
-
-	// Навешивание событий
-	_hangingEvents() {
-		this._element.querySelector('.element__group').addEventListener('click', () => this._paintingOverHeart());
-		this._element.querySelector('.element__trash').addEventListener('click', () => this._deletingCard());
-	}
-}

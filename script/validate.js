@@ -1,4 +1,4 @@
-const lockButton = (block, config) => {
+export const lockButton = (block, config) => {
 	const button = block.querySelector(config.submitButtonSelector);
 	button.classList.add(config.inactiveButtonClass);
 	button.disabled = true;
@@ -77,7 +77,7 @@ const enableValidation = (config) => {
 		})
 	})
 };
-const config = {
+export const config = {
 	formSelector: '.popup__form',
 	inputSelector: '.popup__hield',
 	submitButtonSelector: '.popup__button',
