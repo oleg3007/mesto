@@ -87,4 +87,3 @@ export const config = {
 	spanClassTypeField: '.popup__form-input-error_field_'
 }
 enableValidation(config);
-
