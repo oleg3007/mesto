@@ -1,6 +1,7 @@
 import Card from './Card.js';
-import { lockButton, config } from './validate.js';
+import FormValidator from './validate.js';
 import { initialCards } from './initialCards.js';
+
 
 const page = document.querySelector('.page');
 const main = page.querySelector('.main');
@@ -31,10 +32,32 @@ const popupImageCros = popupImage.querySelector('.popup-image__cros');
 const popupImageFoto = popupImage.querySelector('.popup-image__foto');
 const popupImageSignature = popupImage.querySelector('.popup-image__signature');
 
+const config = {
+	formSelector: '.popup__form',
+	inputSelector: '.popup__hield',
+	submitButtonSelector: '.popup__button',
+	inactiveButtonClass: 'popup__button_disabled',
+	inputErrorClass: 'popup__hield_type_error',
+	errorClass: 'popup__error_visible',
+	spanClassTypeField: '.popup__form-input-error_field_'
+}
+const configCard = {
+	eventCard: '.event-card',
+	element: '.element',
+	elementTitle: '.element__title',
+	elementMaskGroup: '.element__mask-group',
+	elementGroup: '.element__group',
+	elementGroupColorBlack: 'element__group_color_black',
+	elementTrash: '.element__trash',
+}
+
 // функция активации popup 
 function activPopup(block) {
 	block.classList.add('popup_active');
 	document.addEventListener('keydown', deletePopupEscape);
+	const formValidator = new FormValidator(block, config);
+	formValidator.createTodo();
+	formValidator.lockButton();
 }
 // Закрытие popup кнопкой 'Escate'
 function deletePopupEscape(evt) {
@@ -43,15 +66,15 @@ function deletePopupEscape(evt) {
 		removePopup(active);
 	}
 }
+
 // Функциb закрытия popup
 function removePopup(block) {
 	block.classList.remove('popup_active');
 	document.removeEventListener('keydown', deletePopupEscape);
 }
 
-profileAddButton.addEventListener('click', () => { 
-	activPopup(popupItem); 
-	lockButton(popupItem, config)
+profileAddButton.addEventListener('click', () => {
+	activPopup(popupItem);
 });
 
 profileEditButton.addEventListener('click', function () {
@@ -94,22 +117,21 @@ formElement.addEventListener('submit', submitFormProfile);
 
 // Заполнение контента карточками из шаблона 
 initialCards.forEach((item) => {
-	const card = new Card(item.name, item.link);
+	const card = new Card(item.name, item.link, configCard);
 	const cardElement = card.generatorCard();
-
-	document.querySelector('.elements').append(cardElement);
+	elements.append(cardElement);
 })
 // Кнопка сохранение карточки
-popupItemButton.addEventListener('click', function () {
+popupItemButton.addEventListener('click', function (evt) {
+	evt.preventDefault();
 	const name = popupItemTitle.value;
 	const link = popupItemLink.value;
 
-	const card = new Card(name, link);
+	const card = new Card(name, link, configCard);
 	const cardElement = card.generatorCard();
 	elements.prepend(cardElement);
 	removePopup(popupItem);
 	popupItemTitle.value = '';
 	popupItemLink.value = '';
 })
-
 
