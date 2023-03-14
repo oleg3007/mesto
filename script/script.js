@@ -17,7 +17,7 @@ const popupCros = popupProfile.querySelector('.popup__cros');
 const popupHieldName = popupProfile.querySelector('.popup__hield_enter_name');
 const popupHieldAboutMe = popupProfile.querySelector('.popup__hield_enter_about-me');
 
-const formElement = document.querySelector('.popup__conteiner');
+const formPopupProfile = popupProfile.querySelector('.popup__form');
 
 const popupCrosItem = document.querySelector('.popup-item__cros');
 const popupItem = document.querySelector('.popup-item');
@@ -25,7 +25,7 @@ const popupItemTitle = popupItem.querySelector('.popup__hield_enter_title');
 const popupItemLink = popupItem.querySelector('.popup__hield_enter_link');
 const popupItemButton = document.querySelector('.popup-item__button');
 
-const elements = main.querySelector('.elements');
+const elementsContainer = main.querySelector('.elements');
 
 const popupImage = document.querySelector('.popup-image');
 const popupImageCros = popupImage.querySelector('.popup-image__cros');
@@ -55,10 +55,8 @@ const configCard = {
 function activPopup(block) {
 	block.classList.add('popup_active');
 	document.addEventListener('keydown', deletePopupEscape);
-	const formValidator = new FormValidator(block, config);
-	formValidator.createTodo();
-	formValidator.lockButton();
 }
+
 // Закрытие popup кнопкой 'Escate'
 function deletePopupEscape(evt) {
 	if (evt.key === 'Escape') {
@@ -75,12 +73,18 @@ function removePopup(block) {
 
 profileAddButton.addEventListener('click', () => {
 	activPopup(popupItem);
+	const formValidator = new FormValidator(popupItem, config);
+	formValidator.createTodo();
+	formValidator.lockButton();
 });
 
 profileEditButton.addEventListener('click', function () {
 	popupHieldName.value = profileTitle.textContent;
 	popupHieldAboutMe.value = profileText.textContent;
 	activPopup(popupProfile);
+	const formValidator = new FormValidator(popupProfile, config);
+	formValidator.createTodo();
+	formValidator.lockButton();
 })
 
 // Функция заполнения и закрыти popup-profile
@@ -113,13 +117,17 @@ popupCros.addEventListener('click', () => removePopup(popupProfile));
 popupCrosItem.addEventListener('click', () => removePopup(popupItem));
 popupImageCros.addEventListener('click', () => removePopup(popupImage));
 
-formElement.addEventListener('submit', submitFormProfile);
+formPopupProfile.addEventListener('submit', submitFormProfile);
+
+function createCard(name, link, configCard) {
+	const card = new Card(name, link, configCard);
+	return card.generatorCard();
+}
 
 // Заполнение контента карточками из шаблона 
 initialCards.forEach((item) => {
-	const card = new Card(item.name, item.link, configCard);
-	const cardElement = card.generatorCard();
-	elements.append(cardElement);
+	elementsContainer.append(createCard(item.name, item.link, configCard)
+	);
 })
 // Кнопка сохранение карточки
 popupItemButton.addEventListener('click', function (evt) {
@@ -127,9 +135,8 @@ popupItemButton.addEventListener('click', function (evt) {
 	const name = popupItemTitle.value;
 	const link = popupItemLink.value;
 
-	const card = new Card(name, link, configCard);
-	const cardElement = card.generatorCard();
-	elements.prepend(cardElement);
+	elementsContainer.prepend(createCard(name, link, configCard)
+	);
 	removePopup(popupItem);
 	popupItemTitle.value = '';
 	popupItemLink.value = '';
