@@ -11,6 +11,7 @@ export default class Card {
 	}
 	generatorCard() {
 		this._element = this._getTemplate();
+		this._elementGroup = this._element.querySelector(this._config.elementGroup)
 
 		this._element.querySelector(this._config.elementTitle).textContent = this._name;
 		this._element.querySelector(this._config.elementMaskGroup).src = this._link;
@@ -20,7 +21,7 @@ export default class Card {
 	}
 	// Сердце
 	_paintingOverHeart() {
-		this._element.querySelector(this._config.elementGroup).classList.toggle(this._config.elementGroupColorBlack);
+		this._elementGroup.classList.toggle(this._config.elementGroupColorBlack);
 	}
 	// Удаление карточки
 	_deletingCard() { this._element.remove(); }
