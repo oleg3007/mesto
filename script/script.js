@@ -1,5 +1,5 @@
 import Card from './Card.js';
-import FormValidator from './validate.js';
+import FormValidator from './FormValidator.js';
 import { initialCards } from './initialCards.js';
 
 
@@ -74,8 +74,8 @@ function removePopup(block) {
 profileAddButton.addEventListener('click', () => {
 	activPopup(popupItem);
 	const formValidator = new FormValidator(popupItem, config);
-	formValidator.createTodo();
-	formValidator.lockButton();
+	formValidator.enableValidation();
+	formValidator.displayErrorbutton();
 });
 
 profileEditButton.addEventListener('click', function () {
@@ -83,8 +83,8 @@ profileEditButton.addEventListener('click', function () {
 	popupHieldAboutMe.value = profileText.textContent;
 	activPopup(popupProfile);
 	const formValidator = new FormValidator(popupProfile, config);
-	formValidator.createTodo();
-	formValidator.lockButton();
+	formValidator.enableValidation();
+	formValidator.displayErrorbutton();
 })
 
 // Функция заполнения и закрыти popup-profile

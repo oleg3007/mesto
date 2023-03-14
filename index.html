@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="ru">
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,11 +20,13 @@
 			<div class="profile__info">
 				<div class="profile__info-header">
 					<h1 class="profile__title">Жак-Ив Кусто</h1>
-					<button class="profile__edit-button" type="button"><img class="profile__img-pen" src="images/SVG/Перо.svg" alt="Ручка"></button>
+					<button class="profile__edit-button" type="button"><img class="profile__img-pen" src="images/SVG/Перо.svg"
+							alt="Ручка"></button>
 				</div>
 				<p class="profile__text">Исследователь океана</p>
 			</div>
-			<button class="profile__add-button" type="button"><img class="profile__img-cross" src="images/SVG/Крест.svg" alt="Крест"></button>
+			<button class="profile__add-button" type="button"><img class="profile__img-cross" src="images/SVG/Крест.svg"
+					alt="Крест"></button>
 		</section>
 		<section class="elements">
 		</section>
@@ -37,29 +40,13 @@
 			<h2 class="popup__title">Редактировать профиль</h2>
 			<form name="place" class="popup__form" method="post" novalidate>
 				<div class="popup__form-input">
-					<input 
-						class="popup__hield popup__hield_enter_name" 
-						type="text" 
-						name="name" 
-						placeholder="Имя"
-						tabindex="1"
-						minlength="2"
-						maxlength="40"
-						required
-					/>
+					<input class="popup__hield popup__hield_enter_name" type="text" name="name" placeholder="Имя" tabindex="1"
+						minlength="2" maxlength="40" required />
 					<span class="popup__form-input-error popup__form-input-error_field_name"></span>
 				</div>
 				<div class="popup__form-input">
-					<input 
-						class="popup__hield popup__hield_enter_about-me" 
-						type="text" 
-						name="about-me" 
-						placeholder="О себе"
-						tabindex="2"
-						minlength="2"
-						maxlength="200"
-						required
-					/>
+					<input class="popup__hield popup__hield_enter_about-me" type="text" name="about-me" placeholder="О себе"
+						tabindex="2" minlength="2" maxlength="200" required />
 					<span class="popup__form-input-error popup__form-input-error_field_about-me"></span>
 				</div>
 				<button class="popup__button" type="submit">Сохранить</button>
@@ -72,26 +59,13 @@
 			<h2 class="popup__title">Новое место</h2>
 			<form name="place" class="popup__form" method="post" novalidate>
 				<div class="popup__form-input">
-					<input 
-						class="popup__hield popup__hield_enter_title" 
-						type="text" 
-						name="place-name" 
-						placeholder="Название"
-						tabindex="1"
-						minlength="2"
-						maxlength="30"
-						required
-					/>
+					<input class="popup__hield popup__hield_enter_title" type="text" name="place-name" placeholder="Название"
+						tabindex="1" minlength="2" maxlength="30" required />
 					<span class="popup__form-input-error popup__form-input-error_field_place-name"></span>
 				</div>
 				<div class="popup__form-input">
-					<input 
-						class="popup__hield popup__hield_enter_link" 
-						type="URL" 
-						name="link" 
-						placeholder="Ссылка на картинку"
-						required
-					/>
+					<input class="popup__hield popup__hield_enter_link" type="URL" name="link" placeholder="Ссылка на картинку"
+						required />
 					<span class="popup__form-input-error popup__form-input-error_field_link"></span>
 				</div>
 				<button class="popup__button popup-item__button popup__button_disabled" type="submit" disabled>Создать</button>
@@ -107,15 +81,16 @@
 	</div>
 	<template id="event-card" class="event-card">
 		<article class="element">
-				<div class="element__trash"></div>
-				<img class="element__mask-group" src="#" alt="">
-				<h2 class="element__title"></h2>
-				<button class="element__group" type="button"></button>
-			</article>
+			<div class="element__trash"></div>
+			<img class="element__mask-group" src="#" alt="">
+			<h2 class="element__title"></h2>
+			<button class="element__group" type="button"></button>
+		</article>
 	</template>
-	<script defer type="module" src="script/validate.js"></script>
+	<script defer type="module" src="script/FormValidator.js"></script>
 	<script defer type="module" src="script/script.js"></script>
 	<script defer type="module" src="script/Card.js"></script>
 	<script defer type="module" src="script/initialCards.js"></script>
 </body>
+
 </html>
