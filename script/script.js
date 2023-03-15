@@ -111,6 +111,7 @@ function closingWithTheMouse(block) {
 	})
 };
 
+// Закрытие popup крестик
 buttonCloseList.forEach(btn => {
 	const popup = btn.closest('.popup');
 	btn.addEventListener('click', () => removePopup(popup));
