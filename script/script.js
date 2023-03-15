@@ -29,7 +29,7 @@ const popupImage = document.querySelector('.popup-image');
 const popupImageFoto = popupImage.querySelector('.popup-image__foto');
 const popupImageSignature = popupImage.querySelector('.popup-image__signature');
 
-const buttonCloseList = document.querySelectorAll('#popupCros');
+const buttonCloseList = document.querySelectorAll('#popupButtonCros');
 
 const config = {
 	formSelector: '.popup__form',
