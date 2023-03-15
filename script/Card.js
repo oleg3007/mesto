@@ -12,9 +12,10 @@ export default class Card {
 	generatorCard() {
 		this._element = this._getTemplate();
 		this._elementGroup = this._element.querySelector(this._config.elementGroup)
+		this._elementMaskGroup = this._element.querySelector(this._config.elementMaskGroup)
 
 		this._element.querySelector(this._config.elementTitle).textContent = this._name;
-		this._element.querySelector(this._config.elementMaskGroup).src = this._link;
+		this._elementMaskGroup.src = this._link;
 		this._hangingEvents();
 
 		return this._element;
@@ -28,8 +29,8 @@ export default class Card {
 
 	// Навешивание событий
 	_hangingEvents() {
-		this._element.querySelector(this._config.elementGroup).addEventListener('click', () => this._paintingOverHeart());
+		this._elementGroup.addEventListener('click', () => this._paintingOverHeart());
 		this._element.querySelector(this._config.elementTrash).addEventListener('click', () => this._deletingCard());
-		this._element.querySelector(this._config.elementMaskGroup).addEventListener('click', () => openPopupImage(this._name, this._link));
+		this._elementMaskGroup.addEventListener('click', () => openPopupImage(this._name, this._link));
 	}
 }
