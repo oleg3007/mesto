@@ -13,13 +13,11 @@ const profileAddButton = profile.querySelector('.profile__add-button');
 const profileEditButton = profile.querySelector('.profile__edit-button');
 
 const popupProfile = document.querySelector('.popup-profile');
-const popupCros = popupProfile.querySelector('.popup__cros');
 const popupHieldName = popupProfile.querySelector('.popup__hield_enter_name');
 const popupHieldAboutMe = popupProfile.querySelector('.popup__hield_enter_about-me');
 
 const formPopupProfile = popupProfile.querySelector('.popup__form');
 
-const popupCrosItem = document.querySelector('.popup-item__cros');
 const popupItem = document.querySelector('.popup-item');
 const popupItemTitle = popupItem.querySelector('.popup__hield_enter_title');
 const popupItemLink = popupItem.querySelector('.popup__hield_enter_link');
@@ -28,9 +26,10 @@ const popupItemButton = document.querySelector('.popup-item__button');
 const elementsContainer = main.querySelector('.elements');
 
 const popupImage = document.querySelector('.popup-image');
-const popupImageCros = popupImage.querySelector('.popup-image__cros');
 const popupImageFoto = popupImage.querySelector('.popup-image__foto');
 const popupImageSignature = popupImage.querySelector('.popup-image__signature');
+
+const buttonCloseList = document.querySelectorAll('#popupCros');
 
 const config = {
 	formSelector: '.popup__form',
@@ -50,6 +49,12 @@ const configCard = {
 	elementGroupColorBlack: 'element__group_color_black',
 	elementTrash: '.element__trash',
 }
+
+const validatorPopupItem = new FormValidator(popupItem, config);
+validatorPopupItem.enableValidation();
+
+const validatorPopupProfile = new FormValidator(popupProfile, config);
+validatorPopupProfile.enableValidation();
 
 // функция активации popup 
 function activPopup(block) {
@@ -73,18 +78,14 @@ function removePopup(block) {
 
 profileAddButton.addEventListener('click', () => {
 	activPopup(popupItem);
-	const formValidator = new FormValidator(popupItem, config);
-	formValidator.enableValidation();
-	formValidator.displayErrorbutton();
+	validatorPopupItem.displayErrorbutton();
 });
 
 profileEditButton.addEventListener('click', function () {
 	popupHieldName.value = profileTitle.textContent;
 	popupHieldAboutMe.value = profileText.textContent;
 	activPopup(popupProfile);
-	const formValidator = new FormValidator(popupProfile, config);
-	formValidator.enableValidation();
-	formValidator.displayErrorbutton();
+	validatorPopupProfile.displayErrorbutton();
 })
 
 // Функция заполнения и закрыти popup-profile
@@ -109,13 +110,12 @@ function closingWithTheMouse(block) {
 		}
 	})
 };
-closingWithTheMouse(popupProfile);
-closingWithTheMouse(popupItem);
-closingWithTheMouse(popupImage);
 
-popupCros.addEventListener('click', () => removePopup(popupProfile));
-popupCrosItem.addEventListener('click', () => removePopup(popupItem));
-popupImageCros.addEventListener('click', () => removePopup(popupImage));
+buttonCloseList.forEach(btn => {
+	const popup = btn.closest('.popup');
+	btn.addEventListener('click', () => removePopup(popup));
+	closingWithTheMouse(popup);
+})
 
 formPopupProfile.addEventListener('submit', submitFormProfile);
 
