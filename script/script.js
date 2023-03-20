@@ -1,6 +1,7 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import { initialCards } from './initialCards.js';
+import Section from './Section.js';
 
 
 const page = document.querySelector('.page');
@@ -120,26 +121,31 @@ buttonCloseList.forEach(btn => {
 
 formPopupProfile.addEventListener('submit', submitFormProfile);
 
-function createCard(name, link, configCard) {
-	const card = new Card(name, link, configCard);
-	return card.generatorCard();
-}
 
-// Заполнение контента карточками из шаблона 
-initialCards.forEach((item) => {
-	elementsContainer.append(createCard(item.name, item.link, configCard)
-	);
-})
-// Кнопка сохранение карточки
-popupItemButton.addEventListener('click', function (evt) {
-	evt.preventDefault();
-	const name = popupItemTitle.value;
-	const link = popupItemLink.value;
+// // Кнопка сохранение карточки
+// popupItemButton.addEventListener('click', function (evt) {
+// 	evt.preventDefault();
+// const name = popupItemTitle.value;
+// const link = popupItemLink.value;
 
-	elementsContainer.prepend(createCard(name, link, configCard)
-	);
-	removePopup(popupItem);
-	popupItemTitle.value = '';
-	popupItemLink.value = '';
-})
+// elementsContainer.prepend(createCard(name, link, configCard)
+// );
+// removePopup(popupItem);
+// popupItemTitle.value = '';
+// popupItemLink.value = '';
+// })
+
+const section = new Section({
+	items: initialCards,
+	renderer: (data, link) => {
+		const card = new Card(data, link, configCard);
+		const elementCard = card.generatorCard();
+		section.addElement(elementCard);
+	}
+},
+	elementsContainer);
+
+section.addItem();
+
+
 
