@@ -2,6 +2,7 @@ import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import { initialCards } from './initialCards.js';
 import Section from './Section.js';
+import Popup from './Popup.js';
 
 
 const page = document.querySelector('.page');
@@ -59,22 +60,15 @@ validatorPopupProfile.enableValidation();
 
 // функция активации popup 
 function activPopup(block) {
-	block.classList.add('popup_active');
-	document.addEventListener('keydown', deletePopupEscape);
-}
-
-// Закрытие popup кнопкой 'Escate'
-function deletePopupEscape(evt) {
-	if (evt.key === 'Escape') {
-		const active = document.querySelector('.popup_active');
-		removePopup(active);
-	}
+	const popup = new Popup(block);
+	popup.open();
+	popup.setEventListeners();
 }
 
 // Функциb закрытия popup
 function removePopup(block) {
-	block.classList.remove('popup_active');
-	document.removeEventListener('keydown', deletePopupEscape);
+	const popup = new Popup(block);
+	popup.close();
 }
 
 profileAddButton.addEventListener('click', () => {
@@ -103,37 +97,27 @@ export function openPopupImage(titleElement, linkElement) {
 	popupImageSignature.textContent = titleElement;
 	activPopup(popupImage);
 }
-// Закрытие popup левой кнопкой 'мыши'
-function closingWithTheMouse(block) {
-	block.addEventListener('click', (e) => {
-		if (e.target === block) {
-			removePopup(block)
-		}
-	})
-};
 
 // Закрытие popup крестик
 buttonCloseList.forEach(btn => {
 	const popup = btn.closest('.popup');
-	btn.addEventListener('click', () => removePopup(popup));
-	closingWithTheMouse(popup);
+	removePopup(popup);
 })
 
 formPopupProfile.addEventListener('submit', submitFormProfile);
 
-
 // // Кнопка сохранение карточки
-// popupItemButton.addEventListener('click', function (evt) {
-// 	evt.preventDefault();
-// const name = popupItemTitle.value;
-// const link = popupItemLink.value;
+popupItemButton.addEventListener('click', function (evt) {
+	evt.preventDefault();
+	const name = popupItemTitle.value;
+	const link = popupItemLink.value;
 
-// elementsContainer.prepend(createCard(name, link, configCard)
-// );
-// removePopup(popupItem);
-// popupItemTitle.value = '';
-// popupItemLink.value = '';
-// })
+	elementsContainer.prepend(createCard(name, link, configCard));
+
+	removePopup(popupItem);
+	popupItemTitle.value = '';
+	popupItemLink.value = '';
+})
 
 const section = new Section({
 	items: initialCards,
