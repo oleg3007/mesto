@@ -3,6 +3,7 @@ import FormValidator from './FormValidator.js';
 import { initialCards } from './initialCards.js';
 import Section from './Section.js';
 import Popup from './Popup.js';
+import PopupWithImage from './PopupWithImage.js';
 
 
 const page = document.querySelector('.page');
@@ -28,8 +29,6 @@ const popupItemButton = document.querySelector('.popup-item__button');
 const elementsContainer = main.querySelector('.elements');
 
 const popupImage = document.querySelector('.popup-image');
-const popupImageFoto = popupImage.querySelector('.popup-image__foto');
-const popupImageSignature = popupImage.querySelector('.popup-image__signature');
 
 const buttonCloseList = document.querySelectorAll('.cros-popup');
 
@@ -58,12 +57,12 @@ validatorPopupItem.enableValidation();
 const validatorPopupProfile = new FormValidator(popupProfile, config);
 validatorPopupProfile.enableValidation();
 
+const popupWithImage = new PopupWithImage(popupImage);
 
 // функция активации popup 
 function activPopup(block) {
 	const popup = new Popup(block);
 	popup.open();
-	// popup.setEventListeners();
 }
 
 // Функциb закрытия popup
@@ -71,12 +70,12 @@ function removePopup(block) {
 	const popup = new Popup(block);
 	popup.close();
 }
-
+// popup добовлений карточки
 profileAddButton.addEventListener('click', () => {
 	activPopup(popupItem);
 	validatorPopupItem.displayErrorbutton();
 });
-
+// popup заполнения профиля
 profileEditButton.addEventListener('click', function () {
 	popupHieldName.value = profileTitle.textContent;
 	popupHieldAboutMe.value = profileText.textContent;
@@ -93,17 +92,15 @@ function submitFormProfile(evt) {
 }
 // popup открытия картинки
 export function openPopupImage(titleElement, linkElement) {
-	popupImageFoto.src = linkElement;
-	popupImageFoto.alt = titleElement;
-	popupImageSignature.textContent = titleElement;
+	popupWithImage.open(titleElement, linkElement);
 	activPopup(popupImage);
 }
 
 // Закрытие popup крестик
 buttonCloseList.forEach(btn => {
-	const popup = btn.closest('.popup');
+	const popupButton = btn.closest('.popup');
 	btn.addEventListener('click', () => {
-		removePopup(popup);
+		removePopup(popupButton);
 	})
 })
 
