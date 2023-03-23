@@ -4,12 +4,13 @@ export default class Section {
 		this._renderer = renderer;
 		this._selectorContiner = selectorContiner;
 	}
-	addItem() {
+
+	addElement() {
 		this._items.forEach((data) => {
 			this._renderer(data.name, data.link);
 		})
 	}
-	addElement(element) {
+	addItem(element) {
 		this._selectorContiner.prepend(element)
 	}
 

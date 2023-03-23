@@ -58,11 +58,12 @@ validatorPopupItem.enableValidation();
 const validatorPopupProfile = new FormValidator(popupProfile, config);
 validatorPopupProfile.enableValidation();
 
+
 // функция активации popup 
 function activPopup(block) {
 	const popup = new Popup(block);
 	popup.open();
-	popup.setEventListeners();
+	// popup.setEventListeners();
 }
 
 // Функциb закрытия popup
@@ -101,7 +102,9 @@ export function openPopupImage(titleElement, linkElement) {
 // Закрытие popup крестик
 buttonCloseList.forEach(btn => {
 	const popup = btn.closest('.popup');
-	removePopup(popup);
+	btn.addEventListener('click', () => {
+		removePopup(popup);
+	})
 })
 
 formPopupProfile.addEventListener('submit', submitFormProfile);
@@ -112,24 +115,32 @@ popupItemButton.addEventListener('click', function (evt) {
 	const name = popupItemTitle.value;
 	const link = popupItemLink.value;
 
-	elementsContainer.prepend(createCard(name, link, configCard));
+	section.addItem(createCard(name, link, configCard))
 
 	removePopup(popupItem);
 	popupItemTitle.value = '';
 	popupItemLink.value = '';
 })
 
+// Функция создаеия разметки карточки
+function createCard(nameCard, linkCard) {
+	const card = new Card(nameCard, linkCard, configCard);
+	const elementCard = card.generatorCard();
+	return elementCard;
+}
+
+// Контик заполнения и размещение карточки
 const section = new Section({
 	items: initialCards,
 	renderer: (data, link) => {
 		const card = new Card(data, link, configCard);
 		const elementCard = card.generatorCard();
-		section.addElement(elementCard);
+		section.addItem(elementCard);
 	}
 },
 	elementsContainer);
 
-section.addItem();
+section.addElement();
 
 
 
