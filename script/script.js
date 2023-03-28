@@ -4,6 +4,7 @@ import { initialCards } from './initialCards.js';
 import Section from './Section.js';
 import Popup from './Popup.js';
 import PopupWithImage from './PopupWithImage.js';
+import PopupWithForm from './PopupWithForm.js';
 
 
 const page = document.querySelector('.page');
@@ -17,14 +18,11 @@ const profileEditButton = profile.querySelector('.profile__edit-button');
 
 const popupProfile = document.querySelector('.popup-profile');
 const popupHieldName = popupProfile.querySelector('.popup__hield_enter_name');
-const popupHieldAboutMe = popupProfile.querySelector('.popup__hield_enter_about-me');
-
-const formPopupProfile = popupProfile.querySelector('.popup__form');
+const popupHieldAboutMe = popupProfile.querySelector('.popup__hield_enter_about');
 
 const popupItem = document.querySelector('.popup-item');
 const popupItemTitle = popupItem.querySelector('.popup__hield_enter_title');
 const popupItemLink = popupItem.querySelector('.popup__hield_enter_link');
-const popupItemButton = document.querySelector('.popup-item__button');
 
 const elementsContainer = main.querySelector('.elements');
 
@@ -83,13 +81,6 @@ profileEditButton.addEventListener('click', function () {
 	validatorPopupProfile.displayErrorbutton();
 })
 
-// Функция заполнения и закрыти popup-profile
-function submitFormProfile(evt) {
-	evt.preventDefault();
-	profileTitle.textContent = popupHieldName.value;
-	profileText.textContent = popupHieldAboutMe.value;
-	removePopup(popupProfile);
-}
 // popup открытия картинки
 export function openPopupImage(titleElement, linkElement) {
 	popupWithImage.open(titleElement, linkElement);
@@ -104,20 +95,25 @@ buttonCloseList.forEach(btn => {
 	})
 })
 
-formPopupProfile.addEventListener('submit', submitFormProfile);
+// Функция заполнения и закрыти popup-profile
+const popupWithFormProfile = new PopupWithForm(
+	popupProfile,
+	function submitFormProfile({ name, about }) {
+		profileTitle.textContent = name;
+		profileText.textContent = about;
+	}
+)
+popupWithFormProfile.setEventListeners();
 
-// // Кнопка сохранение карточки
-popupItemButton.addEventListener('click', function (evt) {
-	evt.preventDefault();
-	const name = popupItemTitle.value;
-	const link = popupItemLink.value;
-
-	section.addItem(createCard(name, link, configCard))
-
-	removePopup(popupItem);
-	popupItemTitle.value = '';
-	popupItemLink.value = '';
-})
+const popupWithFormItem = new PopupWithForm(
+	popupItem,
+	function submitFormCard({ name, link }) {
+		popupItemTitle.value = name;
+		popupItemLink.value = link;
+		section.addItem(createCard(popupItemTitle.value, popupItemLink.value))
+	}
+)
+popupWithFormItem.setEventListeners();
 
 // Функция создаеия разметки карточки
 function createCard(nameCard, linkCard) {
@@ -130,14 +126,8 @@ function createCard(nameCard, linkCard) {
 const section = new Section({
 	items: initialCards,
 	renderer: (data, link) => {
-		const card = new Card(data, link, configCard);
-		const elementCard = card.generatorCard();
-		section.addItem(elementCard);
+		section.addItem(createCard(data, link));
 	}
 },
 	elementsContainer);
-
 section.addElement();
-
-
-
