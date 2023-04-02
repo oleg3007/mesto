@@ -1,9 +1,9 @@
-import { openPopupImage } from './script.js'
 export default class Card {
-	constructor(name, link, config) {
-		this._name = name;
+	constructor(placeName, link, config, openPopupImage) {
+		this._name = placeName;
 		this._link = link;
 		this._config = config;
+		this._openPopupImage = openPopupImage;
 	}
 	_getTemplate() {
 		const cardElement = document.querySelector(this._config.eventCard).content.querySelector(this._config.element).cloneNode(true);
@@ -31,6 +31,6 @@ export default class Card {
 	_hangingEvents() {
 		this._elementGroup.addEventListener('click', () => this._paintingOverHeart());
 		this._element.querySelector(this._config.elementTrash).addEventListener('click', () => this._deletingCard());
-		this._elementMaskGroup.addEventListener('click', () => openPopupImage(this._name, this._link));
+		this._elementMaskGroup.addEventListener('click', () => this._openPopupImage(this._name, this._link));
 	}
 }

@@ -5,6 +5,7 @@ import Section from './Section.js';
 import Popup from './Popup.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
+import UserInfo from './UserInfo.js';
 
 
 const page = document.querySelector('.page');
@@ -57,6 +58,11 @@ validatorPopupProfile.enableValidation();
 
 const popupWithImage = new PopupWithImage(popupImage);
 
+const userInfo = new UserInfo({
+	name: profileTitle,
+	info: profileText
+});
+
 // функция активации popup 
 function activPopup(block) {
 	const popup = new Popup(block);
@@ -74,15 +80,16 @@ profileAddButton.addEventListener('click', () => {
 	validatorPopupItem.displayErrorbutton();
 });
 // popup заполнения профиля
-profileEditButton.addEventListener('click', function () {
-	popupHieldName.value = profileTitle.textContent;
-	popupHieldAboutMe.value = profileText.textContent;
+profileEditButton.addEventListener('click', () => {
+	const { data, about } = userInfo.getUserInfo();
+	popupHieldName.value = data;
+	popupHieldAboutMe.value = about;
 	activPopup(popupProfile);
 	validatorPopupProfile.displayErrorbutton();
 })
 
 // popup открытия картинки
-export function openPopupImage(titleElement, linkElement) {
+function openPopupImage(titleElement, linkElement) {
 	popupWithImage.open(titleElement, linkElement);
 	activPopup(popupImage);
 }
@@ -98,17 +105,16 @@ buttonCloseList.forEach(btn => {
 // Функция заполнения и закрыти popup-profile
 const popupWithFormProfile = new PopupWithForm(
 	popupProfile,
-	function submitFormProfile({ name, about }) {
-		profileTitle.textContent = name;
-		profileText.textContent = about;
+	function submitFormProfile(data) {
+		userInfo.setUserInfo(data);
 	}
 )
 popupWithFormProfile.setEventListeners();
 
 const popupWithFormItem = new PopupWithForm(
 	popupItem,
-	function submitFormCard({ name, link }) {
-		popupItemTitle.value = name;
+	function submitFormCard({ placeName, link }) {
+		popupItemTitle.value = placeName;
 		popupItemLink.value = link;
 		section.addItem(createCard(popupItemTitle.value, popupItemLink.value))
 	}
@@ -117,7 +123,7 @@ popupWithFormItem.setEventListeners();
 
 // Функция создаеия разметки карточки
 function createCard(nameCard, linkCard) {
-	const card = new Card(nameCard, linkCard, configCard);
+	const card = new Card(nameCard, linkCard, configCard, openPopupImage);
 	const elementCard = card.generatorCard();
 	return elementCard;
 }
@@ -125,8 +131,8 @@ function createCard(nameCard, linkCard) {
 // Контик заполнения и размещение карточки
 const section = new Section({
 	items: initialCards,
-	renderer: (data, link) => {
-		section.addItem(createCard(data, link));
+	renderer: (placeName, link) => {
+		section.addItem(createCard(placeName, link));
 	}
 },
 	elementsContainer);
