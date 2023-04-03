@@ -7,7 +7,6 @@ import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
 import UserInfo from './UserInfo.js';
 
-
 const page = document.querySelector('.page');
 const main = page.querySelector('.main');
 
