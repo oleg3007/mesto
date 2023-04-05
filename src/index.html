@@ -7,26 +7,25 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Mesto</title>
-	<link rel="stylesheet" href="pages/index.css">
 </head>
 
 <body class="page">
 	<header class="header">
-		<img class="header__logo" src="images/SVG/Vector.svg" alt="Логотип 'Mesto Russia'">
+		<img class="header__logo" src="<%=require('./images/SVG/Vector.svg')%>" alt="Логотип 'Mesto Russia'">
 	</header>
 	<main class="main">
 		<section class="profile">
-			<img class="profile__avatar" src="images/Kusto-min.png" alt="Фото Кусто">
+			<img class="profile__avatar" src="<%=require('./images/Kusto-min.png')%>" alt="Фото Кусто">
 			<div class="profile__info">
 				<div class="profile__info-header">
 					<h1 class="profile__title">Жак-Ив Кусто</h1>
-					<button class="profile__edit-button" type="button"><img class="profile__img-pen" src="images/SVG/Перо.svg"
-							alt="Ручка"></button>
+					<button class="profile__edit-button" type="button"><img class="profile__img-pen"
+							src="<%=require('./images/SVG/Перо.svg')%>" alt="Ручка"></button>
 				</div>
 				<p class="profile__text">Исследователь океана</p>
 			</div>
-			<button class="profile__add-button" type="button"><img class="profile__img-cross" src="images/SVG/Крест.svg"
-					alt="Крест"></button>
+			<button class="profile__add-button" type="button"><img class="profile__img-cross"
+					src="<%=require('./images/SVG/Крест.svg')%>" alt="Крест"></button>
 		</section>
 		<section class="elements">
 		</section>
@@ -87,7 +86,6 @@
 			<button class="element__group" type="button"></button>
 		</article>
 	</template>
-	<script defer type="module" src="script/script.js"></script>
 </body>
 
 </html>
