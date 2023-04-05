@@ -1,3 +1,5 @@
+import '../pages/index.css';
+
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import { initialCards } from './initialCards.js';
@@ -6,7 +8,6 @@ import Popup from './Popup.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
 import UserInfo from './UserInfo.js';
-
 
 const page = document.querySelector('.page');
 const main = page.querySelector('.main');
