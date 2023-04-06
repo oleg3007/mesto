@@ -4,12 +4,15 @@ export default class PopupWithForm extends Popup {
 	constructor(selectorPopup, colbeckFunction) {
 		super(selectorPopup);
 		this._colbeckFunction = colbeckFunction;
-		this._popupForm = this._selectorPopup.querySelector('.popup__form');
-		this._popupInput = this._selectorPopup.querySelectorAll('.popup__hield');
+		this._popupForm = this._popup.querySelector('.popup__form');
+		this._popupInputs = this._popup.querySelectorAll('.popup__hield');
+	}
+	open() {
+		super.open();
 	}
 	_getInputValues() {
 		const formInputs = {};
-		this._popupInput.forEach((input) => {
+		this._popupInputs.forEach((input) => {
 			formInputs[input.name] = input.value;
 		});
 		return formInputs;
