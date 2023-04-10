@@ -37,19 +37,19 @@ class FormValidator {
 	_hasInvanLidInput() {
 		return this._inputs.some((input) => !input.validity.valid)
 	}
-	displayErrorbutton() {
+	disableButton() {
 		this._button.classList.add(this._config.inactiveButtonClass);
 		this._button.disabled = true;
 	}
-	_removingErrorbutton() {
+	_enableButton() {
 		this._button.classList.remove(this._config.inactiveButtonClass);
 		this._button.disabled = false;
 	}
 	_toggleButtonState() {
 		if (this._hasInvanLidInput()) {
-			this.displayErrorbutton();
+			this.disableButton();
 		} else {
-			this._removingErrorbutton();
+			this._enableButton();
 		}
 	}
 }

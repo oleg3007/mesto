@@ -1,6 +1,6 @@
 export default class Popup {
-	constructor(Popup) {
-		this._popup = Popup;
+	constructor(popup) {
+		this._popup = popup;
 		this._popupCros = this._popup.querySelector('.cros-popup');
 		this._handleEscClose = this._handleEscClose.bind(this);
 	}

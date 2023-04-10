@@ -12,10 +12,4 @@ export default class PopupWithImage extends Popup {
 		this._popupImageSignature.textContent = name;
 		super.open();
 	}
-	setEventListeners() {
-		super.setEventListeners()
-	}
-	close() {
-		super.close();
-	}
 }

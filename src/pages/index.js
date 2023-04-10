@@ -1,12 +1,12 @@
 import './index.css';
 
-import Card from '../script/Card.js';
-import FormValidator from '../script/FormValidator.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
 import { initialCards } from '../utils/initialCards.js';
-import Section from '../script/Section.js';
-import PopupWithImage from '../script/PopupWithImage.js';
-import PopupWithForm from '../script/PopupWithForm.js';
-import UserInfo from '../script/UserInfo.js';
+import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 import {
 	popupProfile,
 	profileTitle,
@@ -38,7 +38,7 @@ const userInfo = new UserInfo({
 // popup добовлений карточки
 profileAddButton.addEventListener('click', () => {
 	popupWithFormItem.open();
-	validatorPopupItem.displayErrorbutton();
+	validatorPopupItem.disableButton();
 });
 // popup заполнения профиля
 profileEditButton.addEventListener('click', () => {
@@ -46,7 +46,7 @@ profileEditButton.addEventListener('click', () => {
 	popupHieldName.value = data;
 	popupHieldAboutMe.value = about;
 	popupWithFormProfile.open();
-	validatorPopupProfile.displayErrorbutton();
+	validatorPopupProfile.disableButton();
 })
 
 // popup открытия картинки
