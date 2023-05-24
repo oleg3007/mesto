@@ -1,4 +1,4 @@
-
+import { getItems } from '../components/api.js';
 
 import './index.css';
 import Card from '../components/Card.js';
@@ -22,6 +22,8 @@ import {
 	config,
 	configCard
 } from '../utils/constants.js';
+
+// getItems();
 
 const validatorPopupItem = new FormValidator(popupItem, config);
 validatorPopupItem.enableValidation();
