@@ -4,8 +4,14 @@ export const getItems = () => {
 			authorization: '73b60fe0-86c3-4e99-8da2-b793d15f38ab'
 		}
 	})
-		.then(res => res.json())
-		.then((result) => {
-			console.log(result)
+		.then(res => {
+			if (res.ok) {
+				return res.json();
+			} else {
+				return Promise.reject(`Ошибка: ${res.status}`);
+			}
+		})
+		.then((res) => {
+			console.log(res);
 		})
 }

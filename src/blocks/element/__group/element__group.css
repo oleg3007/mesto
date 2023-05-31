@@ -1,17 +1,15 @@
 .element__group {
   background-image: url(../../../images/SVG/heart.svg);
-	background-repeat: repeat;
+  background-repeat: repeat;
   width: 22px;
   height: 19px;
   padding: 0;
   border: none;
   background-color: transparent;
   cursor: pointer;
-	margin: 6px 22px 0 0;
+  margin: 0;
 }
 
 .element__group:hover {
   opacity: 50%;
 }
-
-
