@@ -1,0 +1,9 @@
+.popup-removal__title {
+  margin: 34px 0 38px 36px;
+}
+
+@media screen and (max-width: 540px) {
+  .popup-removal__title {
+    margin: 30px 22px 40px;
+  }
+}

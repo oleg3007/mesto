@@ -1,4 +1,4 @@
-
+import { getItems } from '../components/api.js';
 
 import './index.css';
 import Card from '../components/Card.js';
@@ -12,6 +12,7 @@ import {
 	popupProfile,
 	profileTitle,
 	profileText,
+	profileAvatar,
 	profileAddButton,
 	profileEditButton,
 	popupHieldName,
@@ -23,6 +24,10 @@ import {
 	configCard
 } from '../utils/constants.js';
 
+getItems().then((res) => {
+	console.log(res);
+	submitFormProfile(res);
+});
 
 const validatorPopupItem = new FormValidator(popupItem, config);
 validatorPopupItem.enableValidation();
@@ -32,10 +37,7 @@ validatorPopupProfile.enableValidation();
 
 const popupWithImage = new PopupWithImage(popupImage);
 
-const userInfo = new UserInfo({
-	name: profileTitle,
-	info: profileText
-});
+const userInfo = new UserInfo(profileTitle, profileText, profileAvatar);
 
 // popup добовлений карточки
 profileAddButton.addEventListener('click', () => {
@@ -59,11 +61,14 @@ popupWithImage.setEventListeners();
 
 // Функция заполнения и закрыти popup-profile
 const popupWithFormProfile = new PopupWithForm(
-	popupProfile,
-	function submitFormProfile(data) {
-		userInfo.setUserInfo(data);
-	}
-)
+	popupProfile, submitFormProfile);
+// function submitFormProfile(data) {
+// 	userInfo.setUserInfo(data);
+// }
+
+const submitFormProfile = (data) => {
+	userInfo.setUserInfo(data);
+}
 popupWithFormProfile.setEventListeners();
 
 const popupWithFormItem = new PopupWithForm(
