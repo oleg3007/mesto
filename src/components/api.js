@@ -1,5 +1,5 @@
 export const getItems = () => {
-	return fetch('https://mesto.nomoreparties.co/v1/cohort-66/cards', {
+	return fetch('https://mesto.nomoreparties.co/v1/cohort-66/users/me', {
 		headers: {
 			authorization: '73b60fe0-86c3-4e99-8da2-b793d15f38ab'
 		}
@@ -11,7 +11,7 @@ export const getItems = () => {
 				return Promise.reject(`Ошибка: ${res.status}`);
 			}
 		})
-		.then((res) => {
-			console.log(res);
-		})
+	// .then((res) => {
+	// 	console.log(res);
+	// })
 }
