@@ -5,6 +5,7 @@ const main = page.querySelector('.main');
 const profile = main.querySelector('.profile');
 export const profileTitle = document.querySelector('.profile__title');
 export const profileText = document.querySelector('.profile__text');
+export const profileAvatar = document.querySelector('.profile__avatar');
 export const profileAddButton = profile.querySelector('.profile__add-button');
 export const profileEditButton = profile.querySelector('.profile__edit-button');
 

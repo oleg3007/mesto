@@ -12,6 +12,7 @@ import {
 	popupProfile,
 	profileTitle,
 	profileText,
+	profileAvatar,
 	profileAddButton,
 	profileEditButton,
 	popupHieldName,
@@ -36,7 +37,7 @@ validatorPopupProfile.enableValidation();
 
 const popupWithImage = new PopupWithImage(popupImage);
 
-const userInfo = new UserInfo(profileTitle, profileText);
+const userInfo = new UserInfo(profileTitle, profileText, profileAvatar);
 
 // popup добовлений карточки
 profileAddButton.addEventListener('click', () => {
