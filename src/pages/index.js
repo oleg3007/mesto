@@ -33,9 +33,9 @@ getCards().then((res) => {
 	console.log(res);
 	const datas = res
 	initialCards(datas);
-	datas.forEach((data) => {
-		console.log(data.likes);
-	})
+	// datas.forEach((data) => {
+	// 	console.log(data.likes.length);
+	// })
 })
 
 const validatorPopupItem = new FormValidator(popupItem, config);
@@ -86,8 +86,8 @@ const popupWithFormItem = new PopupWithForm(
 popupWithFormItem.setEventListeners();
 
 // Функция создаеия разметки карточки
-function createCard(nameCard, linkCard) {
-	const card = new Card(nameCard, linkCard, configCard, openPopupImage);
+function createCard(nameCard, linkCard, likesCard) {
+	const card = new Card(nameCard, linkCard, likesCard, configCard, openPopupImage);
 	const elementCard = card.generatorCard();
 	return elementCard;
 }
@@ -98,6 +98,6 @@ const section = new Section(initialCards, elementsContainer);
 // Формирование стартовых карточек на страницу
 const initialCards = (datas) => {
 	datas.forEach((data) => {
-		section.addItem(createCard(data.name, data.link));
+		section.addItem(createCard(data.name, data.link, data.likes.length));
 	})
 }

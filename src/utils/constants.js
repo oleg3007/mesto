@@ -36,4 +36,5 @@ export const configCard = {
 	elementGroup: '.element__group',
 	elementGroupColorBlack: 'element__group_color_black',
 	elementTrash: '.element__trash',
+	elementNanbersLike: '.element__numbers-like',
 }
