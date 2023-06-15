@@ -5,7 +5,7 @@ export default class Section {
 	}
 
 	renderItems(data) {
-		this._renderer(data.name, data.link);
+		this._renderer(data.name, data.link, data.likes.length);
 	}
 	addItem(element) {
 		this._continer.prepend(element)

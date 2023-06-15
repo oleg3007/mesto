@@ -1,5 +1,6 @@
 import { getItems } from '../components/api.js';
-import { getCards } from '../components/api.js'
+import { getCards } from '../components/api.js';
+import { toSentProfile } from '../components/api.js';
 
 import './index.css';
 import Card from '../components/Card.js';
@@ -25,18 +26,22 @@ import {
 } from '../utils/constants.js';
 
 getItems().then((res) => {
-	console.log(res);
+	// console.log(res);
 	submitFormProfile(res);
 });
 
 getCards().then((res) => {
-	console.log(res);
+	// console.log(res);
 	const datas = res
 	initialCards(datas);
-	// datas.forEach((data) => {
-	// 	console.log(data.likes.length);
-	// })
 })
+
+function profileData(data, about) {
+	toSentProfile(data, about).then((res) => {
+		console.log(res);
+	});
+}
+
 
 const validatorPopupItem = new FormValidator(popupItem, config);
 validatorPopupItem.enableValidation();
@@ -46,7 +51,7 @@ validatorPopupProfile.enableValidation();
 
 const popupWithImage = new PopupWithImage(popupImage);
 
-const userInfo = new UserInfo(profileTitle, profileText, profileAvatar);
+const userInfo = new UserInfo(profileTitle, profileText);
 
 // popup добовлений карточки
 profileAddButton.addEventListener('click', () => {
@@ -56,6 +61,7 @@ profileAddButton.addEventListener('click', () => {
 // popup заполнения профиля
 profileEditButton.addEventListener('click', () => {
 	const { data, about } = userInfo.getUserInfo();
+	// profileData(data, about);
 	popupHieldName.value = data;
 	popupHieldAboutMe.value = about;
 	popupWithFormProfile.open();
@@ -72,8 +78,9 @@ popupWithImage.setEventListeners();
 const popupWithFormProfile = new PopupWithForm(
 	popupProfile, submitFormProfile);
 
-const submitFormProfile = (data) => {
+function submitFormProfile(data) {
 	userInfo.setUserInfo(data);
+	profileData(data.name, data.about)
 }
 popupWithFormProfile.setEventListeners();
 

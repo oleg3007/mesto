@@ -1,7 +1,7 @@
 export const getItems = () => {
-	return fetch('https://mesto.nomoreparties.co/v1/cohort-66/users/me', {
+	return fetch('https://mesto.nomoreparties.co/v1/cohort-69/users/me', {
 		headers: {
-			authorization: '73b60fe0-86c3-4e99-8da2-b793d15f38ab'
+			authorization: '636e7451-8f67-42b3-b1e1-363eac3d0122'
 		}
 	})
 		.then(res => {
@@ -14,9 +14,9 @@ export const getItems = () => {
 }
 
 export const getCards = () => {
-	return fetch('https://mesto.nomoreparties.co/v1/cohort-66/cards', {
+	return fetch('https://mesto.nomoreparties.co/v1/cohort-69/cards', {
 		headers: {
-			authorization: '73b60fe0-86c3-4e99-8da2-b793d15f38ab'
+			authorization: '636e7451-8f67-42b3-b1e1-363eac3d0122'
 		}
 	})
 		.then(res => {
@@ -28,14 +28,14 @@ export const getCards = () => {
 		})
 }
 
-export const toSentCards = () => {
-	return fetch('https://mesto.nomoreparties.co/v1/cohort-66/cards', {
+export const toSentProfile = (name, about) => {
+	return fetch('https://mesto.nomoreparties.co/v1/cohort-69/users/me', {
 		method: 'PATCH',
 		headers: {
-			authorization: '73b60fe0-86c3-4e99-8da2-b793d15f38ab',
+			authorization: '636e7451-8f67-42b3-b1e1-363eac3d0122',
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify({})
+		body: JSON.stringify({ name, about })
 	})
 		.then(res => {
 			if (res.ok) {
