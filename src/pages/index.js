@@ -26,7 +26,7 @@ import {
 } from '../utils/constants.js';
 
 getItems().then((res) => {
-	// console.log(res);
+	console.log(res.avatar);
 	submitFormProfile(res);
 });
 
@@ -51,7 +51,7 @@ validatorPopupProfile.enableValidation();
 
 const popupWithImage = new PopupWithImage(popupImage);
 
-const userInfo = new UserInfo(profileTitle, profileText);
+const userInfo = new UserInfo(profileTitle, profileText, profileAvatar);
 
 // popup добовлений карточки
 profileAddButton.addEventListener('click', () => {
@@ -80,7 +80,7 @@ const popupWithFormProfile = new PopupWithForm(
 
 function submitFormProfile(data) {
 	userInfo.setUserInfo(data);
-	profileData(data.name, data.about)
+	profileData(data.name, data.about, data.avatar)
 }
 popupWithFormProfile.setEventListeners();
 
