@@ -16,7 +16,6 @@
 	<main class="main">
 		<section class="profile">
 			<button class="profile__avatarButton">
-				<!-- <img class="profile__avatar-pen" src="<%=require('./images/SVG/Перо.svg')%>" alt="Ручка"> -->
 				<img class="profile__avatar" src="#" alt="">
 			</button>
 			<div class="profile__info">
@@ -86,6 +85,21 @@
 			<button class="popup__cros cros-popup" type="button"></button>
 			<h2 class="popup__title popup-removal__title">Вы уверены?</h2>
 			<button class="popup__button popup-removal__button" type="submit">Да</button>
+		</div>
+	</div>
+	<div class="popup-avatar">
+		<div class="popup-avatar__conteiner">
+			<button class="popup__cros popup-avatar__cros cros-popup" type="button"></button>
+			<h2 class="popup__title">Обновить аватар</h2>
+			<form name="place" class="popup__form" method="post" novalidate>
+				<div class="popup__form-input">
+					<input class="popup__hield popup__hield_enter_link" type="URL" name="link" placeholder="Ссылка на картинку"
+						required />
+					<span class="popup__form-input-error popup__form-input-error_field_link"></span>
+				</div>
+				<button class="popup__button popup-avatar__button popup__button_disabled" type="submit"
+					disabled>Сохранить</button>
+			</form>
 		</div>
 	</div>
 	<template id="event-card" class="event-card">
