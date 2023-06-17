@@ -8,12 +8,15 @@ export const profileText = document.querySelector('.profile__text');
 export const profileAvatar = document.querySelector('.profile__avatar');
 export const profileAddButton = profile.querySelector('.profile__add-button');
 export const profileEditButton = profile.querySelector('.profile__edit-button');
+export const profileAvatarButton = profile.querySelector('.profile__avatar-button');
 
 export const popupProfile = document.querySelector('.popup-profile');
 export const popupHieldName = popupProfile.querySelector('.popup__hield_enter_name');
 export const popupHieldAboutMe = popupProfile.querySelector('.popup__hield_enter_about');
 
 export const popupItem = document.querySelector('.popup-item');
+
+export const popupAvatar = document.querySelector('.popup-avatar');
 
 export const elementsContainer = main.querySelector('.elements');
 

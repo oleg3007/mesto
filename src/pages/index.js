@@ -1,6 +1,6 @@
 import { getItems } from '../components/api.js';
 import { getCards } from '../components/api.js';
-import { toSentProfile } from '../components/api.js';
+import { toSentProfile, toSentAvatar } from '../components/api.js';
 
 import './index.css';
 import Card from '../components/Card.js';
@@ -16,9 +16,11 @@ import {
 	profileAvatar,
 	profileAddButton,
 	profileEditButton,
+	profileAvatarButton,
 	popupHieldName,
 	popupHieldAboutMe,
 	popupItem,
+	popupAvatar,
 	elementsContainer,
 	popupImage,
 	config,
@@ -26,8 +28,9 @@ import {
 } from '../utils/constants.js';
 
 getItems().then((res) => {
-	console.log(res.avatar);
+	console.log(res);
 	submitFormProfile(res);
+	submitFormAvatar(res);
 });
 
 getCards().then((res) => {
@@ -41,13 +44,20 @@ function profileData(data, about) {
 		console.log(res);
 	});
 }
-
+function avatarData(avatar) {
+	toSentAvatar(avatar).then((res) => {
+		console.log(res);
+	});
+}
 
 const validatorPopupItem = new FormValidator(popupItem, config);
 validatorPopupItem.enableValidation();
 
 const validatorPopupProfile = new FormValidator(popupProfile, config);
 validatorPopupProfile.enableValidation();
+
+const validatorPopupAvatar = new FormValidator(popupAvatar, config);
+validatorPopupAvatar.enableValidation();
 
 const popupWithImage = new PopupWithImage(popupImage);
 
@@ -61,17 +71,22 @@ profileAddButton.addEventListener('click', () => {
 // popup заполнения профиля
 profileEditButton.addEventListener('click', () => {
 	const { data, about } = userInfo.getUserInfo();
-	// profileData(data, about);
 	popupHieldName.value = data;
 	popupHieldAboutMe.value = about;
 	popupWithFormProfile.open();
 	validatorPopupProfile.disableButton();
-})
+});
+
+// popup аватара
+profileAvatarButton.addEventListener('click', () => {
+	popupWithFormAvatar.open();
+	validatorPopupAvatar.disableButton()
+});
 
 // popup открытия картинки
 function openPopupImage(titleElement, linkElement) {
 	popupWithImage.open(titleElement, linkElement);
-}
+};
 popupWithImage.setEventListeners();
 
 // Функция заполнения и закрыти popup-profile
@@ -80,10 +95,11 @@ const popupWithFormProfile = new PopupWithForm(
 
 function submitFormProfile(data) {
 	userInfo.setUserInfo(data);
-	profileData(data.name, data.about, data.avatar)
-}
+	profileData(data.name, data.about)
+};
 popupWithFormProfile.setEventListeners();
 
+// Функция заполнения и закрытий popup-item
 const popupWithFormItem = new PopupWithForm(
 	popupItem,
 	function submitFormCard({ placeName, link }) {
@@ -91,6 +107,16 @@ const popupWithFormItem = new PopupWithForm(
 	}
 )
 popupWithFormItem.setEventListeners();
+
+// Функция заполнения и закрытий popup-avatar
+const popupWithFormAvatar = new PopupWithForm(popupAvatar, submitFormAvatar);
+
+function submitFormAvatar(data) {
+	console.log(data.avatar);
+	userInfo.setUserAvatar(data);
+	avatarData(data.avatar)
+};
+popupWithFormAvatar.setEventListeners();
 
 // Функция создаеия разметки карточки
 function createCard(nameCard, linkCard, likesCard) {
