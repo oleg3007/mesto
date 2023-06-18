@@ -2,6 +2,7 @@ import { getItems } from '../components/api.js';
 import { getCards } from '../components/api.js';
 import { toSentAvatar } from '../components/api.js';
 import { toSentProfile } from '../components/api.js';
+import { toSentCard } from '../components/api.js';
 
 import './index.css';
 import Card from '../components/Card.js';
@@ -47,6 +48,10 @@ function profileData(data) {
 function avatarData(data) {
 	console.log(data.avatar)
 	toSentAvatar(data.avatar)
+}
+function cardData(name, link) {
+	console.log(name, link)
+	toSentCard(name, link)
 }
 
 const validatorPopupItem = new FormValidator(popupItem, config);
@@ -102,7 +107,8 @@ popupWithFormProfile.setEventListeners();
 const popupWithFormItem = new PopupWithForm(
 	popupItem,
 	function submitFormCard({ placeName, link }) {
-		section.addItem(createCard(placeName, link))
+		section.addItem(createCard(placeName, link));
+		cardData(placeName, link);
 	}
 )
 popupWithFormItem.setEventListeners();
