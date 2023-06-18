@@ -1,10 +1,12 @@
 export default class Card {
-	constructor(placeName, link, likes, config, openPopupImage) {
+	constructor(placeName, link, likes, idCard, config, openPopupImage) {
 		this._name = placeName;
 		this._link = link;
-		this._likes = likes
+		this._likes = likes;
 		this._config = config;
 		this._openPopupImage = openPopupImage;
+		this._idCard = idCard;
+		this._myId = 'a9fc61ccd6b1d6d302ee03a2';
 	}
 	_getTemplate() {
 		const cardElement = document.querySelector(this._config.eventCard).content.querySelector(this._config.element).cloneNode(true);
@@ -21,9 +23,16 @@ export default class Card {
 		this._elementNanbersLike.textContent = this._likes;
 
 		this._hangingEvents();
+		this._deletingOnTheCartCard();
 
 		return this._element;
 	}
+	_deletingOnTheCartCard() {
+		if (this._myId !== this._idCard) {
+			this._element.querySelector(this._config.elementTrash).remove();
+		}
+	}
+
 	// Сердце
 	_paintingOverHeart() {
 		this._elementGroup.classList.toggle(this._config.elementGroupColorBlack);

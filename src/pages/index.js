@@ -30,27 +30,23 @@ import {
 } from '../utils/constants.js';
 
 getItems().then((res) => {
-	// console.log(res);
 	submitFormProfile(res);
 	submitFormAvatar(res);
 });
 
 getCards().then((res) => {
-	// console.log(res);
 	const datas = res
+	console.log(datas)
 	initialCards(datas);
 })
 
 function profileData(data) {
-	console.log(data.name, data.about);
 	toSentProfile(data.name, data.about)
 }
 function avatarData(data) {
-	console.log(data.avatar)
 	toSentAvatar(data.avatar)
 }
 function cardData(name, link) {
-	console.log(name, link)
 	toSentCard(name, link)
 }
 
@@ -97,7 +93,6 @@ popupWithImage.setEventListeners();
 const popupWithFormProfile = new PopupWithForm(popupProfile, submitFormProfile);
 
 function submitFormProfile(data) {
-	console.log(data);
 	userInfo.setUserInfo(data);
 	profileData(data);
 };
@@ -117,15 +112,14 @@ popupWithFormItem.setEventListeners();
 const popupWithFormAvatar = new PopupWithForm(popupAvatar, submitFormAvatar);
 
 function submitFormAvatar(data) {
-	console.log(data);
 	userInfo.setUserAvatar(data);
 	avatarData(data);
 };
 popupWithFormAvatar.setEventListeners();
 
 // Функция создаеия разметки карточки
-function createCard(nameCard, linkCard, likesCard) {
-	const card = new Card(nameCard, linkCard, likesCard, configCard, openPopupImage);
+function createCard(nameCard, linkCard, likesCard, idCard) {
+	const card = new Card(nameCard, linkCard, likesCard, idCard, configCard, openPopupImage);
 	const elementCard = card.generatorCard();
 	return elementCard;
 }
@@ -136,6 +130,7 @@ const section = new Section(initialCards, elementsContainer);
 // Формирование стартовых карточек на страницу
 const initialCards = (datas) => {
 	datas.forEach((data) => {
-		section.addItem(createCard(data.name, data.link, data.likes.length));
+		console.log(data);
+		section.addItem(createCard(data.name, data.link, data.likes.length, data.owner._id));
 	})
 }
