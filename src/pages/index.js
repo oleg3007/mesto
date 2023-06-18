@@ -1,6 +1,7 @@
 import { getItems } from '../components/api.js';
 import { getCards } from '../components/api.js';
-import { toSentProfile, toSentAvatar } from '../components/api.js';
+import { toSentAvatar } from '../components/api.js';
+import { toSentProfile } from '../components/api.js';
 
 import './index.css';
 import Card from '../components/Card.js';
@@ -28,7 +29,7 @@ import {
 } from '../utils/constants.js';
 
 getItems().then((res) => {
-	console.log(res);
+	// console.log(res);
 	submitFormProfile(res);
 	submitFormAvatar(res);
 });
@@ -39,15 +40,13 @@ getCards().then((res) => {
 	initialCards(datas);
 })
 
-function profileData(data, about) {
-	toSentProfile(data, about).then((res) => {
-		console.log(res);
-	});
+function profileData(data) {
+	console.log(data.name, data.about);
+	toSentProfile(data.name, data.about)
 }
-function avatarData(avatar) {
-	toSentAvatar(avatar).then((res) => {
-		console.log(res);
-	});
+function avatarData(data) {
+	console.log(data.avatar)
+	toSentAvatar(data.avatar)
 }
 
 const validatorPopupItem = new FormValidator(popupItem, config);
@@ -90,12 +89,12 @@ function openPopupImage(titleElement, linkElement) {
 popupWithImage.setEventListeners();
 
 // Функция заполнения и закрыти popup-profile
-const popupWithFormProfile = new PopupWithForm(
-	popupProfile, submitFormProfile);
+const popupWithFormProfile = new PopupWithForm(popupProfile, submitFormProfile);
 
 function submitFormProfile(data) {
+	console.log(data);
 	userInfo.setUserInfo(data);
-	profileData(data.name, data.about)
+	profileData(data);
 };
 popupWithFormProfile.setEventListeners();
 
@@ -112,9 +111,9 @@ popupWithFormItem.setEventListeners();
 const popupWithFormAvatar = new PopupWithForm(popupAvatar, submitFormAvatar);
 
 function submitFormAvatar(data) {
-	console.log(data.avatar);
+	console.log(data);
 	userInfo.setUserAvatar(data);
-	avatarData(data.avatar)
+	avatarData(data);
 };
 popupWithFormAvatar.setEventListeners();
 

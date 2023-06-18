@@ -11,11 +11,14 @@ export default class UserInfo {
 		}
 	}
 	setUserInfo(data) {
+		console.log(data)
 		this._name.textContent = data.name;
 		this._info.textContent = data.about;
-		// this._avatar.src = data.avatar;
+		console.log(this._name, this._info)
 	}
 	setUserAvatar(data) {
+		console.log(data)
 		this._avatar.src = data.avatar;
+		console.log(this._avatar)
 	}
 }
