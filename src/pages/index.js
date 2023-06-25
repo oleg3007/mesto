@@ -1,9 +1,3 @@
-import { getItems } from '../components/api.js';
-import { getCards } from '../components/api.js';
-import { toSentAvatar } from '../components/api.js';
-import { toSentProfile } from '../components/api.js';
-import { toSentCard } from '../components/api.js';
-
 import './index.css';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -11,6 +5,7 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/api.js';
 import {
 	popupProfile,
 	profileTitle,
@@ -26,29 +21,20 @@ import {
 	elementsContainer,
 	popupImage,
 	config,
-	configCard
+	configCard,
+	configApi
 } from '../utils/constants.js';
 
-getItems().then((res) => {
+const api = new Api(configApi);
+
+api.getRequestFromTheServerUser().then((res) => {
 	submitFormProfile(res);
 	submitFormAvatar(res);
-});
-
-getCards().then((res) => {
-	const datas = res
-	console.log(datas)
-	initialCards(datas);
 })
 
-function profileData(data) {
-	toSentProfile(data.name, data.about)
-}
-function avatarData(data) {
-	toSentAvatar(data.avatar)
-}
-function cardData(name, link) {
-	toSentCard(name, link)
-}
+api.getRequestFromTheServerCard().then((res) => {
+	initialCards(res);
+})
 
 const validatorPopupItem = new FormValidator(popupItem, config);
 validatorPopupItem.enableValidation();
@@ -94,7 +80,7 @@ const popupWithFormProfile = new PopupWithForm(popupProfile, submitFormProfile);
 
 function submitFormProfile(data) {
 	userInfo.setUserInfo(data);
-	profileData(data);
+	api.patchToSentProfile(data)
 };
 popupWithFormProfile.setEventListeners();
 
@@ -103,7 +89,7 @@ const popupWithFormItem = new PopupWithForm(
 	popupItem,
 	function submitFormCard({ placeName, link }) {
 		section.addItem(createCard(placeName, link));
-		cardData(placeName, link);
+		api.toSentCard(placeName, link);
 	}
 )
 popupWithFormItem.setEventListeners();
@@ -113,7 +99,7 @@ const popupWithFormAvatar = new PopupWithForm(popupAvatar, submitFormAvatar);
 
 function submitFormAvatar(data) {
 	userInfo.setUserAvatar(data);
-	avatarData(data);
+	api.patchToSentAvatar(data)
 };
 popupWithFormAvatar.setEventListeners();
 
