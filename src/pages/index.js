@@ -1,8 +1,3 @@
-import { getItems } from '../components/api.js';
-import { getCards } from '../components/api.js';
-import { toSentAvatar } from '../components/api.js';
-import { toSentProfile } from '../components/api.js';
-
 import './index.css';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -10,6 +5,7 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/api.js';
 import {
 	popupProfile,
 	profileTitle,
@@ -25,29 +21,20 @@ import {
 	elementsContainer,
 	popupImage,
 	config,
-	configCard
+	configCard,
+	configApi
 } from '../utils/constants.js';
 
-getItems().then((res) => {
-	// console.log(res);
+const api = new Api(configApi);
+
+api.getRequestFromTheServerUser().then((res) => {
 	submitFormProfile(res);
 	submitFormAvatar(res);
-});
-
-getCards().then((res) => {
-	// console.log(res);
-	const datas = res
-	initialCards(datas);
 })
 
-function profileData(data) {
-	console.log(data.name, data.about);
-	toSentProfile(data.name, data.about)
-}
-function avatarData(data) {
-	console.log(data.avatar)
-	toSentAvatar(data.avatar)
-}
+api.getRequestFromTheServerCard().then((res) => {
+	initialCards(res);
+})
 
 const validatorPopupItem = new FormValidator(popupItem, config);
 validatorPopupItem.enableValidation();
@@ -92,9 +79,8 @@ popupWithImage.setEventListeners();
 const popupWithFormProfile = new PopupWithForm(popupProfile, submitFormProfile);
 
 function submitFormProfile(data) {
-	console.log(data);
 	userInfo.setUserInfo(data);
-	profileData(data);
+	api.patchToSentProfile(data)
 };
 popupWithFormProfile.setEventListeners();
 
@@ -102,7 +88,8 @@ popupWithFormProfile.setEventListeners();
 const popupWithFormItem = new PopupWithForm(
 	popupItem,
 	function submitFormCard({ placeName, link }) {
-		section.addItem(createCard(placeName, link))
+		section.addItem(createCard(placeName, link));
+		api.toSentCard(placeName, link);
 	}
 )
 popupWithFormItem.setEventListeners();
@@ -111,15 +98,14 @@ popupWithFormItem.setEventListeners();
 const popupWithFormAvatar = new PopupWithForm(popupAvatar, submitFormAvatar);
 
 function submitFormAvatar(data) {
-	console.log(data);
 	userInfo.setUserAvatar(data);
-	avatarData(data);
+	api.patchToSentAvatar(data)
 };
 popupWithFormAvatar.setEventListeners();
 
 // Функция создаеия разметки карточки
-function createCard(nameCard, linkCard, likesCard) {
-	const card = new Card(nameCard, linkCard, likesCard, configCard, openPopupImage);
+function createCard(nameCard, linkCard, likesCard, idCard) {
+	const card = new Card(nameCard, linkCard, likesCard, idCard, configCard, openPopupImage);
 	const elementCard = card.generatorCard();
 	return elementCard;
 }
@@ -130,6 +116,7 @@ const section = new Section(initialCards, elementsContainer);
 // Формирование стартовых карточек на страницу
 const initialCards = (datas) => {
 	datas.forEach((data) => {
-		section.addItem(createCard(data.name, data.link, data.likes.length));
+		console.log(data);
+		section.addItem(createCard(data.name, data.link, data.likes.length, data.owner._id));
 	})
 }
