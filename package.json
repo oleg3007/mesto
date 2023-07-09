@@ -1,27 +1,33 @@
 {
-	"devDependencies": {
-		"@babel/core": "^7.21.4",
-		"@babel/preset-env": "^7.21.4",
-		"autoprefixer": "^10.4.14",
-		"babel-loader": "^9.1.2",
-		"clean-webpack-plugin": "^4.0.0",
-		"css-loader": "^6.7.3",
-		"cssnano": "^6.0.0",
-		"gh-pages": "^5.0.0",
-		"html-webpack-plugin": "^5.5.0",
-		"mini-css-extract-plugin": "^2.7.5",
-		"postcss-loader": "^7.2.1",
-		"webpack": "^5.78.0",
-		"webpack-cli": "^5.0.1",
-		"webpack-dev-server": "^4.13.2"
-	},
-	"scripts": {
-		"build": "webpack --mode production",
-		"dev": "webpack serve",
-		"predeploy": "npm run build",
-		"deploy": "gh-pages -d dist"
-	},
-	"dependencies": {
-		"core-js": "^3.29.1"
-	}
+  "devDependencies": {
+    "@babel/core": "^7.22.8",
+    "@babel/preset-env": "^7.22.7",
+    "autoprefixer": "^10.4.14",
+    "babel-loader": "^9.1.3",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.8.1",
+    "cssnano": "^6.0.1",
+    "gh-pages": "^5.0.0",
+    "html-webpack-plugin": "^5.5.3",
+    "mini-css-extract-plugin": "^2.7.6",
+    "postcss-loader": "^7.3.3",
+    "webpack": "^5.88.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.13.2"
+  },
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack serve",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "dependencies": {
+    "core-js": "^3.31.1"
+  },
+  "name": "mesto",
+  "description": "Данный проект предназначен для закреплении навыков верстки, а также для начала практики в языке програмирования Java Script. Сайт \"Место\" разрабатывается для людей которые любят путушествовать, в нем человек может зарегистрироваться и выкладывать фото мест где он побывал. Так же он может взаимодействовать с другими пользователями, отмечая их фото.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Oleg Bitelev",
+  "license": "ISC"
 }
