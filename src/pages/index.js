@@ -117,21 +117,10 @@ function createCard(data, userId) {
 	return elementCard;
 }
 
-// // Контик заполнения и размещение карточки
-// const section = new Section(initialCards, elementsContainer);
-
-// // Формирование стартовых карточек на страницу
-// const initialCards = (data) => {
-// 	const placeItem = createCard(data);
-// 	section.addItem(placeItem);
-// }
-
-const section = new Section({ 
-	// items: initialCards, 
+const section = new Section({  
 	renderer: (data) => { 
 		section.addItem(createCard(data, userId)); 
 	} 
 }, 
 	elementsContainer); 
-// section.renderItems(); 
  

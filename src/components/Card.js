@@ -1,12 +1,8 @@
 export default class Card {
 	constructor(data, userId, config, openPopupImage) {
 		this._data = data;
-		// this._name = data.name;
-		// this._link = data.link;
-		// this._likes = data.likes;
 		this._config = config;
 		this._openPopupImage = openPopupImage;
-		// this._idCard = data.owner._id;
 		this._myId = userId;
 	}
 	_getTemplate() {
@@ -25,7 +21,6 @@ export default class Card {
 		
 		this._hangingEvents();
 		this._deletingOnTheCartCard();
-		// console.log(this._element)
 		return this._element;
 	}
 	_deletingOnTheCartCard() {
