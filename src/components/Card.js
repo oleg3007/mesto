@@ -1,12 +1,13 @@
 export default class Card {
-	constructor(placeName, link, likes, idCard, config, openPopupImage) {
-		this._name = placeName;
-		this._link = link;
-		this._likes = likes;
+	constructor(data, userId, config, openPopupImage) {
+		this._data = data;
+		// this._name = data.name;
+		// this._link = data.link;
+		// this._likes = data.likes;
 		this._config = config;
 		this._openPopupImage = openPopupImage;
-		this._idCard = idCard;
-		this._myId = 'a9fc61ccd6b1d6d302ee03a2';
+		// this._idCard = data.owner._id;
+		this._myId = userId;
 	}
 	_getTemplate() {
 		const cardElement = document.querySelector(this._config.eventCard).content.querySelector(this._config.element).cloneNode(true);
@@ -18,17 +19,17 @@ export default class Card {
 		this._elementMaskGroup = this._element.querySelector(this._config.elementMaskGroup);
 		this._elementNanbersLike = this._element.querySelector(this._config.elementNanbersLike);
 
-		this._element.querySelector(this._config.elementTitle).textContent = this._name;
-		this._elementMaskGroup.src = this._link;
-		this._elementNanbersLike.textContent = this._likes;
-
+		this._element.querySelector(this._config.elementTitle).textContent = this._data.name;
+		this._elementMaskGroup.src = this._data.link;
+		this._elementNanbersLike.textContent = this._data.likes.length;
+		
 		this._hangingEvents();
 		this._deletingOnTheCartCard();
-
+		// console.log(this._element)
 		return this._element;
 	}
 	_deletingOnTheCartCard() {
-		if (this._myId !== this._idCard) {
+		if (this._myId !== this._data.owner._id) {
 			this._element.querySelector(this._config.elementTrash).remove();
 		}
 	}
@@ -49,9 +50,8 @@ export default class Card {
 			} else {
 				this._elementNanbersLike.textContent--;
 			}
-
 		});
 		this._element.querySelector(this._config.elementTrash).addEventListener('click', () => this._deletingCard());
-		this._elementMaskGroup.addEventListener('click', () => this._openPopupImage(this._name, this._link));
+		this._elementMaskGroup.addEventListener('click', () => this._openPopupImage(this._data.name, this._data.link));
 	}
 }

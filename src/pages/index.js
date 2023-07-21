@@ -5,7 +5,7 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
-import Api from '../components/api.js';
+import Api from '../components/Api.js';
 import {
 	popupProfile,
 	profileTitle,
@@ -27,14 +27,19 @@ import {
 
 const api = new Api(configApi);
 
-api.getRequestFromTheServerUser().then((res) => {
-	submitFormProfile(res);
-	submitFormAvatar(res);
-})
+let userId = null;
 
-api.getRequestFromTheServerCard().then((res) => {
-	initialCards(res);
-})
+Promise.all([api.getServerUser(), api.getServerCard()])
+	.then(([dataUser, cards]) => {
+		submitFormProfile(dataUser);
+		submitFormAvatar(dataUser);
+		userId = dataUser._id;
+		section.renderItems(cards, userId); 
+		console.log(userId);
+	})
+	.catch(errs => {
+		console.log(errs);
+	})
 
 const validatorPopupItem = new FormValidator(popupItem, config);
 validatorPopupItem.enableValidation();
@@ -87,9 +92,11 @@ popupWithFormProfile.setEventListeners();
 // Функция заполнения и закрытий popup-item
 const popupWithFormItem = new PopupWithForm(
 	popupItem,
-	function submitFormCard({ placeName, link }) {
-		section.addItem(createCard(placeName, link));
-		api.toSentCard(placeName, link);
+	function submitFormCard(data) {
+		api.toSentCard(data.name, data.link)
+		.then(data => {
+			section.addItem(createCard(data, userId))
+		});
 	}
 )
 popupWithFormItem.setEventListeners();
@@ -104,19 +111,27 @@ function submitFormAvatar(data) {
 popupWithFormAvatar.setEventListeners();
 
 // Функция создаеия разметки карточки
-function createCard(nameCard, linkCard, likesCard, idCard) {
-	const card = new Card(nameCard, linkCard, likesCard, idCard, configCard, openPopupImage);
+function createCard(data, userId) {
+	const card = new Card(data, userId, configCard, openPopupImage);
 	const elementCard = card.generatorCard();
 	return elementCard;
 }
 
-// Контик заполнения и размещение карточки
-const section = new Section(initialCards, elementsContainer);
+// // Контик заполнения и размещение карточки
+// const section = new Section(initialCards, elementsContainer);
 
-// Формирование стартовых карточек на страницу
-const initialCards = (datas) => {
-	datas.forEach((data) => {
-		console.log(data);
-		section.addItem(createCard(data.name, data.link, data.likes.length, data.owner._id));
-	})
-}
+// // Формирование стартовых карточек на страницу
+// const initialCards = (data) => {
+// 	const placeItem = createCard(data);
+// 	section.addItem(placeItem);
+// }
+
+const section = new Section({ 
+	// items: initialCards, 
+	renderer: (data) => { 
+		section.addItem(createCard(data, userId)); 
+	} 
+}, 
+	elementsContainer); 
+// section.renderItems(); 
+ 

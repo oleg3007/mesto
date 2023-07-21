@@ -12,13 +12,13 @@ export default class Api {
 			return Promise.reject(`Ошибка: ${res.status}`);
 		}
 	}
-	getRequestFromTheServerUser() {
+	getServerUser() {
 		return fetch(this._usersMy, {
 			headers: { authorization: this._authorization }
 		})
 			.then(res => this._errorChecking(res))
 	}
-	getRequestFromTheServerCard() {
+	getServerCard() {
 		return fetch(this._cards, {
 			headers: { authorization: this._authorization }
 		})
