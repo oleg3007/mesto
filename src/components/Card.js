@@ -1,7 +1,8 @@
 export default class Card {
-	constructor(data, userId, config, openPopupImage) {
+	constructor(data, userId, config, openPopupImage, functionDelete) {
 		this._data = data;
 		this._config = config;
+		this._functionDelete = functionDelete;
 		this._openPopupImage = openPopupImage;
 		this._myId = userId;
 	}
@@ -34,8 +35,9 @@ export default class Card {
 		this._elementGroup.classList.toggle(this._config.elementGroupColorBlack);
 	}
 	// Удаление карточки
-	_deletingCard() { this._element.remove(); }
-
+	deletingCard() { 
+		this._element.remove(); 
+	}
 	// Навешивание событий
 	_hangingEvents() {
 		this._elementGroup.addEventListener('click', () => {
@@ -46,7 +48,7 @@ export default class Card {
 				this._elementNanbersLike.textContent--;
 			}
 		});
-		this._element.querySelector(this._config.elementTrash).addEventListener('click', () => this._deletingCard());
+		this._element.querySelector(this._config.elementTrash).addEventListener('click', () => this._functionDelete(this, this._data));
 		this._elementMaskGroup.addEventListener('click', () => this._openPopupImage(this._data.name, this._data.link));
 	}
 }

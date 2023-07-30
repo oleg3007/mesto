@@ -6,6 +6,8 @@ export default class PopupWithForm extends Popup {
 		this._colbeckFunction = colbeckFunction;
 		this._popupForm = this._popup.querySelector('.popup__form');
 		this._popupInputs = this._popup.querySelectorAll('.popup__hield');
+		this._submitBtn = this._popup.querySelector('.popup__button');
+		this._defaultBtnText = this._submitBtn.textContent;
 	}
 
 	_getInputValues() {
@@ -15,10 +17,14 @@ export default class PopupWithForm extends Popup {
 		});
 		return formInputs;
 	}
+	textInButton(){
+		this._submitBtn.textContent = this._defaultBtnText
+	  }
 	setEventListeners() {
 		super.setEventListeners();
 		this._popupForm.addEventListener('submit', (evt) => {
 			evt.preventDefault();
+			this._submitBtn.textContent = 'Сохранение...';
 			this._colbeckFunction(this._getInputValues())
 			this.close();
 		});

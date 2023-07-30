@@ -22,6 +22,8 @@ export const elementsContainer = main.querySelector('.elements');
 
 export const popupImage = document.querySelector('.popup-image');
 
+export const popupRemoval = document.querySelector('.popup-removal');
+
 export const config = {
 	formSelector: '.popup__form',
 	inputSelector: '.popup__hield',
@@ -42,9 +44,8 @@ export const configCard = {
 	elementNanbersLike: '.element__numbers-like',
 }
 export const configApi = {
-	authorization: '636e7451-8f67-42b3-b1e1-363eac3d0122',
-	usersMy: 'https://mesto.nomoreparties.co/v1/cohort-69/users/me',
-	cards: 'https://mesto.nomoreparties.co/v1/cohort-69/cards',
-	usersMyAvatar: 'https://mesto.nomoreparties.co/v1/cohort-69/users/me/avatar',
-
+	authorization: '25bce6e4-fd9b-4672-9cb4-33ee46971c81',
+	usersMy: 'https://mesto.nomoreparties.co/v1/cohort-72/users/me',
+	cards: 'https://mesto.nomoreparties.co/v1/cohort-72/cards',
+	usersMyAvatar: 'https://mesto.nomoreparties.co/v1/cohort-72/users/me/avatar',
 }

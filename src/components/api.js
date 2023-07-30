@@ -60,4 +60,14 @@ export default class Api {
 		})
 			.then(res => this._errorChecking(res))
 	}
+	cardDelete(idCard) {
+		// console.log(idCard)
+		return fetch(`${this._cards}/${idCard}`, {
+			method: 'DELETE',
+			headers: {
+				authorization: this._authorization,
+			}
+		})
+			.then(res => this._errorChecking(res))
+	}
 }
