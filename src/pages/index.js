@@ -104,6 +104,7 @@ const popupWithFormItem = new PopupWithForm(
 	(data) => {
 		api.toSentCard(data.name, data.link)
 		.then(data => {
+			console.log(data)
 			section.addItem(createCard(data, userId))
 		})
 		.catch((error => console.error(`Ошибка создание карточки ${error}`)))
@@ -129,15 +130,27 @@ function cardDelete(card, element) {
 	});
 }
 
+function workingWithLikesCards(card, cardId) {
+	if (card.buttenLike()) {
+		api.deleteLikeCard(cardId)
+		.then(res =>card.paintingOverHeart(res.likes))
+		.catch((error => console.error(`Ошибка удаления лайка ${error}`)))
+	} else {
+		api.putLikeCard(cardId)
+		.then(res =>card.paintingOverHeart(res.likes))
+		.catch((error => console.error(`Ошибка постовления лайка ${error}`)))
+	}
+}
+
 // Функция создаеия разметки карточки
 function createCard(data, userId) {
-	const card = new Card(data, userId, configCard, openPopupImage, cardDelete);
+	const card = new Card(data, userId, configCard, openPopupImage, cardDelete, workingWithLikesCards);
 	const elementCard = card.generatorCard();
 	return elementCard;
 }
 
 const section = new Section({  
-	renderer: (data) => { 
+	renderer: (data) => {
 		section.addItem(createCard(data, userId)); 
 	} 
 }, 
