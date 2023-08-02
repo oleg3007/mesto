@@ -1,11 +1,10 @@
 export default class Api {
-	constructor(config) {
-		this._authorization = config.authorization;
-		this._usersMy = config.usersMy;
-		this._cards = config.cards;
-		this._usersMyAvatar = config.usersMyAvatar;
+	constructor(options) {
+		this._baseUrl = options.baseUrl;
+		this._headers = options.headers;
 	}
-	_errorChecking(res) {
+
+	_checkingError(res) {
 		if (res.ok) {
 			return res.json();
 		} else {
@@ -13,78 +12,63 @@ export default class Api {
 		}
 	}
 	getServerUser() {
-		return fetch(this._usersMy, {
-			headers: { authorization: this._authorization }
+		return fetch(`${this._baseUrl}/users/me`, {
+			headers: this._headers,
 		})
-			.then(res => this._errorChecking(res))
+			.then(res => this._checkingError(res))
 	}
 	getServerCard() {
-		return fetch(this._cards, {
-			headers: { authorization: this._authorization }
+		return fetch(`${this._baseUrl}/cards`, {
+			headers: this._headers,
 		})
-			.then(res => this._errorChecking(res))
+			.then(res => this._checkingError(res))
 	}
 	patchToSentProfile(data) {
-		return fetch(this._usersMy, {
+		return fetch(`${this._baseUrl}/users/me`, {
 			method: 'PATCH',
-			headers: {
-				authorization: this._authorization,
-				'Content-Type': 'application/json'
-			},
+			headers: this._headers,
 			body: JSON.stringify({
 				name: data.name,
 				about: data.about
 			})
 		})
-			.then(res => this._errorChecking(res))
+			.then(res => this._checkingError(res))
 	}
 	patchToSentAvatar(data) {
-		return fetch(this._usersMyAvatar, {
+		return fetch(`${this._baseUrl}/users/me/avatar`, {
 			method: 'PATCH',
-			headers: {
-				authorization: this._authorization,
-				'Content-Type': 'application/json'
-			},
+			headers: this._headers,
 			body: JSON.stringify({ avatar: data.avatar })
 		})
-			.then(res => this._errorChecking(res))
+			.then(res => this._checkingError(res))
 	}
 	toSentCard(name, link) {
-		return fetch(this._cards, {
+		return fetch(`${this._baseUrl}/cards`, {
 			method: 'POST',
-			headers: {
-				authorization: this._authorization,
-				'Content-Type': 'application/json'
-			},
+			headers: this._headers,
 			body: JSON.stringify({ name, link })
 		})
-			.then(res => this._errorChecking(res))
+			.then(res => this._checkingError(res))
 	}
-	cardDelete(idCard) {
-		return fetch(`${this._cards}/${idCard}`, {
+	deleteCard(idCard) {
+		return fetch(`${this._baseUrl}/cards/${idCard}`, {
 			method: 'DELETE',
-			headers: {
-				authorization: this._authorization,
-			}
+			headers: this._headers,
 		})
-			.then(res => this._errorChecking(res))
+			.then(res => this._checkingError(res))
 	}
 	putLikeCard(idCard) {
-		return fetch(`${this._cards}/${idCard}/likes`, {
+		return fetch(`${this._baseUrl}/cards/${idCard}/likes`, {
 			method: 'PUT',
-			headers: {
-				authorization: this._authorization,
-			}
+			headers: this._headers,
 		})
-			.then(res => this._errorChecking(res))
+			.then(res => this._checkingError(res))
 	}
 	deleteLikeCard(idCard) {
-		return fetch(`${this._cards}/${idCard}/likes`, {
+		return fetch(`${this._baseUrl}/cards/${idCard}/likes`, {
 			method: 'DELETE',
-			headers: {
-				authorization: this._authorization,
-			}
+			headers: this._headers,
 		})
-			.then(res => this._errorChecking(res))
+			.then(res => this._checkingError(res))
 	}
 }

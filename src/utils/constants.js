@@ -43,9 +43,3 @@ export const configCard = {
 	elementTrash: '.element__trash',
 	elementNanbersLike: '.element__numbers-like',
 }
-export const configApi = {
-	authorization: '25bce6e4-fd9b-4672-9cb4-33ee46971c81',
-	usersMy: 'https://mesto.nomoreparties.co/v1/cohort-72/users/me',
-	cards: 'https://mesto.nomoreparties.co/v1/cohort-72/cards',
-	usersMyAvatar: 'https://mesto.nomoreparties.co/v1/cohort-72/users/me/avatar',
-}

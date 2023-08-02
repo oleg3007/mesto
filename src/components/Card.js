@@ -18,6 +18,7 @@ export default class Card {
 		this._elementNanbersLike = this._element.querySelector(this._config.elementNanbersLike);
 
 		this._element.querySelector(this._config.elementTitle).textContent = this._data.name;
+		this._elementMaskGroup.alt = this._data.name;
 		this._elementMaskGroup.src = this._data.link;
 		this._elementNanbersLike.textContent = this._data.likes.length;
 		
@@ -46,8 +47,9 @@ export default class Card {
 		this._elementNanbersLike.textContent = lieks.length;
 	}
 	// Удаление карточки
-	deletingCard() { 
+	deletIngCard() { 
 		this._element.remove(); 
+		this._element = null; 
 	}
 	
 	buttenLike() {
@@ -57,7 +59,7 @@ export default class Card {
 	// Навешивание событий
 	_hangingEvents() {
 		this._elementGroup.addEventListener('click', () => this._functionLikeCards(this, this._data._id));
-		this._element.querySelector(this._config.elementTrash).addEventListener('click', () => this._functionDelete(this, this._data));
+		this._element.querySelector(this._config.elementTrash).addEventListener('click', () => this._functionDelete({ card: this, cardId: this._data._id }));
 		this._elementMaskGroup.addEventListener('click', () => this._openPopupImage(this._data.name, this._data.link));
 	}
 }

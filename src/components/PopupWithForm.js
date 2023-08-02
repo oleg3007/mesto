@@ -8,8 +8,15 @@ export default class PopupWithForm extends Popup {
 		this._popupInputs = this._popup.querySelectorAll('.popup__hield');
 		this._submitBtn = this._popup.querySelector('.popup__button');
 		this._defaultBtnText = this._submitBtn.textContent;
+		// this._submitBtnText = this._submitBtn.textContent
 	}
-
+	// renderLoading(isLoading, loadingText='Сохранение...') {
+	// 	if (isLoading) {
+	// 	  this._submitBtn.textContent = loadingText;
+	// 	} else {
+	// 	  this._submitBtn.textContent = this._submitBtnText;
+	// 	}
+	//   }
 	_getInputValues() {
 		const formInputs = {};
 		this._popupInputs.forEach((input) => {
@@ -17,7 +24,7 @@ export default class PopupWithForm extends Popup {
 		});
 		return formInputs;
 	}
-	textInButton(){
+	setDefaultText(){
 		this._submitBtn.textContent = this._defaultBtnText
 	  }
 	setEventListeners() {
@@ -26,7 +33,6 @@ export default class PopupWithForm extends Popup {
 			evt.preventDefault();
 			this._submitBtn.textContent = 'Сохранение...';
 			this._colbeckFunction(this._getInputValues())
-			this.close();
 		});
 	}
 	close() {
