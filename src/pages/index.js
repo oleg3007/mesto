@@ -35,7 +35,7 @@ const api = new Api({
   });
 let userId = null;
 
-Promise.all([api.getServerUser(), api.getServerCard()])
+Promise.all([api.getServerUser(), api.getServerCards()])
 	.then(([dataUser, cards]) => {
 		submitFormProfile(dataUser);
 		submitFormAvatar(dataUser);
@@ -94,11 +94,13 @@ function openPopupImage(titleElement, linkElement) {
 // Функция заполнения и закрыти popup-profile
 function submitFormProfile(data) {
 	api.patchToSentProfile(data)
-	.then(userInfo.setUserInfo(data))
+	.then(() => {
+		userInfo.setUserInfo(data);
+		popupWithFormProfile.close();
+	})
 	.catch((error => console.error(`Ошибка заполнения профиля ${error}`)))
 	.finally(() => {
 		popupWithFormProfile.setDefaultText();
-		popupWithFormProfile.close();
 	})
 };
 
@@ -106,14 +108,14 @@ function submitFormProfile(data) {
 const popupWithFormItem = new PopupWithForm(
 	popupItem,
 	(data) => {
-		api.toSentCard(data.name, data.link)
+		api.sendCard(data.name, data.link)
 		.then(data => {
 			section.addItem(createCard(data, userId));
+			popupWithFormItem.close();
 		})
 		.catch((error => console.error(`Ошибка создание карточки ${error}`)))
 		.finally(() => {
 			popupWithFormItem.setDefaultText();
-			popupWithFormItem.close();
 		})
 	}
 )
@@ -122,11 +124,13 @@ popupWithFormItem.setEventListeners();
 // Функция заполнения и закрытий popup-avatar
 function submitFormAvatar(data) {
 	api.patchToSentAvatar(data)
-	.then(userInfo.setUserAvatar(data))
+	.then(() => {
+		userInfo.setUserAvatar(data);
+		popupWithFormAvatar.close();
+	})
 	.catch((error => console.error(`Ошибка добовления аватара ${error}`)))
 	.finally(() => {
 		popupWithFormAvatar.setDefaultText();
-		popupWithFormAvatar.close()
 	})
 };
 
@@ -135,27 +139,28 @@ const deletePopupCard  = new PopupDeleteCard(popupRemoval, ({ card, cardId }) =>
 	console.log(cardId)
 	api.deleteCard(cardId)
 	  .then(() => {
-		card.deletIngCard();
+		card.deleteCard();
+		deletePopupCard.close()
 	  })
 	  .catch((error => console.error(`Возникла ошибка при попытке удаления карточки ${error}`)))
-	  .finally(() => deletePopupCard.close())
   });
   deletePopupCard.setEventListeners();
-function interactionIngWithLikesCards(card, cardId) {
-	if (card.buttenLike()) {
+  
+function handleLike(card, cardId) {
+	if (card.isLiked()) {
 		api.deleteLikeCard(cardId)
-		.then(res =>card.paintingOverHeart(res.likes))
+		.then(res =>card.setLikes(res.likes))
 		.catch((error => console.error(`Ошибка удаления лайка ${error}`)))
 	} else {
 		api.putLikeCard(cardId)
-		.then(res => card.paintingOverHeart(res.likes))
+		.then(res => card.setLikes(res.likes))
 		.catch((error => console.error(`Ошибка постовления лайка ${error}`)))
 	}
 }
 
 // Функция создаеия разметки карточки
 function createCard(data, userId) {
-	const card = new Card(data, userId, configCard, openPopupImage, deletePopupCard.open, interactionIngWithLikesCards);
+	const card = new Card(data, userId, configCard, openPopupImage, deletePopupCard.open, handleLike);
 	const elementCard = card.generatorCard();
 	return elementCard;
 }
