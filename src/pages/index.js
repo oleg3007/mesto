@@ -6,7 +6,7 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupDeleteCard from '../components/PopupDeleteCard';
 import UserInfo from '../components/UserInfo.js';
-import Api from '../components/Api.js';
+import Api from '../components/Аpi.js'
 import {
 	popupProfile,
 	profileTitle,
